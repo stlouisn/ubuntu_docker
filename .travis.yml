@@ -10,7 +10,7 @@ env:
   global:
     - BUILD_DATE="`date -u +%Y-%m-%dT%H:%M:%SZ`"
     - BUILD_NUMBER="$TRAVIS_BUILD_NUMBER"
-    - DOCKER_DESCRIPTION="ubuntu"
+    - DOCKER_DESCRIPTION="minimal ubuntu base image"
     - DOCKER_MAINTAINER="stlouisn"
     - DOCKER_NAME="ubuntu"
     - DOCKER_URL="https://www.ubuntu.com/"
@@ -21,6 +21,7 @@ env:
   matrix:
     - DOCKER_TAG="latest"
       DOCKER_VERSION="`curl -s https://raw.githubusercontent.com/tianon/docker-brew-ubuntu-core/master/rolling`"
+      DOWNLOAD_URL="http://cdimage.ubuntu.com/ubuntu-base/daily/current/bionic-base-amd64.tar.gz"
 
 before_install:
   - sudo apt-get update -q
@@ -28,8 +29,9 @@ before_install:
   - docker version
 
 install:
-  - docker run ubuntu:rolling bash -c "exit"
-  - docker ps -a
+#  - docker run ubuntu:rolling bash -c "exit"
+#  - docker ps -a
+  - wget $DOWNLOAD_URL -O rootfs.tar.gz
 
 before_script:
   - sed -i -e '/^$/d' -e 's/^[ \t]*//' -e '/^#/d' Dockerfile

@@ -36,8 +36,8 @@ install:
     apt-get autoclean -y ;
     rm -rf /tmp/* ;
     rm -rf /var/lib/apt/lists/* ;
-    exit"
-  - docker export `docker ps -a | grep baseimage | awk -F ' ' {'print $1'}` | docker import ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
+    exit "
+  - docker export `docker ps -a | grep ubuntu  | awk -F ' ' {'print $1'}` | docker import ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
 
 #  - docker build
 #  - docker run bash "exit"

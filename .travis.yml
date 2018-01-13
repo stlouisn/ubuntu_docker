@@ -35,7 +35,7 @@ install:
 #  - docker build
 #  - docker run bash "exit"
 #  - docker export | docker import --change "CMD /bin/bash" --message "this is a message" ubuntu:$DOCKER_VERSION
-  - docker import ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
+  - docker import $DOWNLOAD_URL ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
 
 #before_script:
 #  - sed -i -e '/^$/d' -e 's/^[ \t]*//' -e '/^#/d' Dockerfile

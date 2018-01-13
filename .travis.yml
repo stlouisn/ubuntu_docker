@@ -28,11 +28,14 @@ before_install:
   - docker version
   
 install:
-#  - docker build --tag 
   - docker run --name ubuntu -it -e DEBIAN_FRONTEND=noninteractive ubuntu:rolling /bin/bash -c "
     apt-get update ;
     apt-get upgrade -y ;
-    apt-get install -y --no-install-recommends ca-certificates curl gosu openssl tzdata ;
+    apt-get install -y --no-install-recommends ca-certificates
+      curl
+      gosu
+      openssl
+      tzdata ;
     apt-get autoremove -y --purge ;
     apt-get autoclean -y ;
     rm -rf /tmp/* ;
@@ -40,8 +43,8 @@ install:
     exit "
 
 script:
-#  - docker run --name ubuntu -it ubuntu:rolling /bin/bash -c exit
-  - docker export `docker ps -a | grep ubuntu  | awk -F ' ' {'print $1'}` | docker import - ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
+  - docker export -o ubuntu-${DOCKER_VERSION}-base.tar `docker ps -a | grep ubuntu  | awk -F ' ' {'print $1'}`
+  - docker import ubuntu-${DOCKER_VERSION}-base.tar ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
 
 after_success:
   - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin

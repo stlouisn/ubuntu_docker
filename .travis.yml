@@ -20,6 +20,9 @@ env:
 
   matrix:
     - DOCKER_TAG="latest"
+      DOCKER_VERSION="bionic"
+      DOWNLOAD_URL="http://cdimage.ubuntu.com/ubuntu-base/daily/current/`curl -s http://cdimage.ubuntu.com/ubuntu-base/daily/current/ | grep 'amd64.tar.gz' | awk -F '>' {'print $7'} | head -n 1 | awk -F '<' {'print $1'}`"
+    - DOCKER_TAG="stable"
       DOCKER_VERSION="artful"
       DOWNLOAD_URL="http://cdimage.ubuntu.com/ubuntu-base/releases/${DOCKER_VERSION}/release/`curl -s http://cdimage.ubuntu.com/ubuntu-base/releases/${DOCKER_VERSION}/release/ | grep amd64 | awk -F '>' {'print $7'} | head -n 1 | awk -F '<' {'print $1'}`"
       
@@ -32,7 +35,7 @@ install:
 #  - docker build
 #  - docker run bash "exit"
 #  - docker export | docker import --change "CMD /bin/bash" --message "this is a message" ubuntu:$DOCKER_VERSION
-  - docker import ${DOWNLOAD_URL}
+  - docker import ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
 
 #before_script:
 #  - sed -i -e '/^$/d' -e 's/^[ \t]*//' -e '/^#/d' Dockerfile
@@ -53,9 +56,9 @@ install:
 #    --tag ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
 #    --pull .
 
-after_success:
-  - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
-  - docker push ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
+#after_success:
+#  - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
+#  - docker push ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
 
 notifications:
   email:

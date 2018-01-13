@@ -19,23 +19,30 @@ env:
     - VCS_URL="`git remote get-url origin | head -c-5`"
 
   matrix:
-    - DOCKER_TAG="latest"
-      DOCKER_VERSION="bionic"
-      DOWNLOAD_URL="http://cdimage.ubuntu.com/ubuntu-base/daily/current/`curl -s http://cdimage.ubuntu.com/ubuntu-base/daily/current/ | grep 'amd64.tar.gz' | awk -F '>' {'print $7'} | head -n 1 | awk -F '<' {'print $1'}`"
-    - DOCKER_TAG="stable"
-      DOCKER_VERSION="artful"
-      DOWNLOAD_URL="http://cdimage.ubuntu.com/ubuntu-base/releases/${DOCKER_VERSION}/release/`curl -s http://cdimage.ubuntu.com/ubuntu-base/releases/${DOCKER_VERSION}/release/ | grep amd64 | awk -F '>' {'print $7'} | head -n 1 | awk -F '<' {'print $1'}`"
-      
+    - DOCKER_TAG="rolling"
+      DOCKER_VERSION="`curl -s https://raw.githubusercontent.com/tianon/docker-brew-ubuntu-core/master/rolling`"
+
 before_install:
   - sudo apt-get update -q
   - sudo apt-get upgrade -q -y
   - docker version
-
+  
 install:
+  - docker run --name ubuntu -it -e DEBIAN_FRONTEND=noninteractive ubuntu:rolling /bin/bash -c "
+    apt-get update ;
+    apt-get upgrade -y ;
+    apt-get install -y --no-install-recommends ca-certificates curl gosu openssl tzdata ;
+    apt-get autoremove -y --purge ;
+    apt-get autoclean -y ;
+    rm -rf /tmp/* ;
+    rm -rf /var/lib/apt/lists/* ;
+    exit"
+  - docker export `docker ps -a | grep baseimage | awk -F ' ' {'print $1'}` | docker import ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
+
 #  - docker build
 #  - docker run bash "exit"
 #  - docker export | docker import --change "CMD /bin/bash" --message "this is a message" ubuntu:$DOCKER_VERSION
-  - docker import $DOWNLOAD_URL ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
+#  - docker import $DOWNLOAD_URL ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
 
 #before_script:
 #  - sed -i -e '/^$/d' -e 's/^[ \t]*//' -e '/^#/d' Dockerfile

@@ -17,7 +17,6 @@ env:
     - SCHEMA_VERSION="1.0"
     - VCS_REF="`git rev-parse --short HEAD`"
     - VCS_URL="`git remote get-url origin | head -c-5`"
-
   matrix:
     - DOCKER_TAG="rolling"
       DOCKER_VERSION="`curl -s https://raw.githubusercontent.com/tianon/docker-brew-ubuntu-core/master/rolling`"

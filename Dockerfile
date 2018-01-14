@@ -6,40 +6,52 @@ RUN \
 
 #######################################################
 
-    # Update apt-cache
-    apt update && \
-
-    # Update Ubuntu
-    apt upgrade -y && \
+    # Update and upgrade
+    apt-get update && apt-get upgrade -y && \
 
     # Install tzdata
-    apt install -y --no-install-recommends \
+    apt-get install -y --no-install-recommends \
         tzdata && \
 
     # Install SSL
-    apt install -y --no-install-recommends \
+    apt-get install -y --no-install-recommends \
         ca-certificates \
         openssl && \
 
     # Install curl
-    apt install -y --no-install-recommends \
+    apt-get install -y --no-install-recommends \
         curl && \
 
+    # Install wget
+    apt-get install -y --no-install-recommends \
+        wget && \
+
     # Install gosu
-    apt install -y --no-install-recommends \
+    apt-get install -y --no-install-recommends \
         gosu && \
 
 #######################################################
 
-    #sed -i "s@:/usr/games@@" /etc/environment && \
-    #sed -i "s@:/usr/local/games@@" /etc/environment && \
-    #sed -i "s@alias l='ls -CF'@alias l='ls -la'@ /root/.bashrc && \
+    # Customize system profile
+    sed -i "s@:/usr/games@@" /etc/environment && \
+    sed -i "s@:/usr/local/games@@" /etc/environment && \
+
+    # Customize root profile
+    sed -i "s@alias l='ls -CF'@alias l='ls -la'@ /root/.bashrc && \
+    
+    # Remove unnecessary files
+    rm -rf \
+        /opt \
+        /usr/games \
+        /srv \
+        /var/opt && \
 
 #######################################################
 
     # Clean apt-cache
-    apt autoremove -y --purge && \
-    apt autoclean -y && \
+    apt-get autoremove -y --purge && \
+    apt-get clean -y && \
+    apt-get autoclean -y && \
 
     # Cleanup temporary folders
     rm -rf \

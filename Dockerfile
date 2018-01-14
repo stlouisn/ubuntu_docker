@@ -22,10 +22,6 @@ RUN \
     apt-get install -y --no-install-recommends \
         curl && \
 
-    # Install wget
-    apt-get install -y --no-install-recommends \
-        wget && \
-
     # Install gosu
     apt-get install -y --no-install-recommends \
         gosu && \

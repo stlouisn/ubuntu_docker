@@ -38,7 +38,7 @@ RUN \
 
     # Customize root profile
     sed -i "s@alias l='ls -CF'@alias l='ls -la'@" /root/.bashrc && \
-    
+
     # Remove unnecessary files
     rm -rf \
         /opt \

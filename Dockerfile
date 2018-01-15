@@ -4,8 +4,6 @@ RUN \
 
     export DEBIAN_FRONTEND=noninteractive && \
 
-#######################################################
-
     # Update and upgrade
     apt-get update && apt-get upgrade -y && \
 
@@ -31,8 +29,6 @@ RUN \
         nano \
         tree && \
 
-#######################################################
-
     # Customize system profile
     sed -i "s@:/usr/games@@" /etc/environment && \
     sed -i "s@:/usr/local/games@@" /etc/environment && \
@@ -46,8 +42,6 @@ RUN \
         /usr/games \
         /srv \
         /var/opt && \
-
-#######################################################
 
     # Clean apt-cache
     apt-get autoremove -y --purge && \

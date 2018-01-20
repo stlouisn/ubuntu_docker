@@ -33,8 +33,8 @@ RUN \
     sed -i "s@:/usr/games@@" /etc/environment && \
     sed -i "s@:/usr/local/games@@" /etc/environment && \
 
-#    # Customize root profile
-#    sed -i "s@alias l='ls -CF'@alias l='ls -la'@" /root/.bashrc && \
+    # Customize root profile
+    sed -i "s@alias l='ls -CF'@alias l='ls -la'@" /root/.bashrc && \
 
     # Remove unnecessary files
     rm -rf \

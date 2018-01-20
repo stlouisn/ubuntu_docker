@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Default language
+export LC_ALL=C.UTF-8
+
 # Default editor
 export EDITOR='/bin/nano'
 

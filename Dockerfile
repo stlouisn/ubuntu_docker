@@ -1,5 +1,7 @@
 FROM ubuntu:rolling
 
+COPY rootfs /
+
 RUN \
 
     export DEBIAN_FRONTEND=noninteractive && \

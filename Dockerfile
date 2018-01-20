@@ -31,6 +31,10 @@ RUN \
         nano \
         tree && \
 
+    # Customize system profile
+    sed -i "s@:/usr/games@@" /etc/environment && \
+    sed -i "s@:/usr/local/games@@" /etc/environment && \
+
     # Customize root profile
     sed -i "s@alias ll='ls@#alias ll='ls@" /root/.bashrc && \
     sed -i "s@alias la='ls@#alias la='ls@" /root/.bashrc && \
@@ -39,6 +43,8 @@ RUN \
     # Remove unnecessary directories
     rm -rf \
         /opt \
+        /usr/games \
+        /usr/local/games \
         /srv \
         /var/opt && \
 

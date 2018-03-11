@@ -1,6 +1,12 @@
 language: bash
 dist: trusty
+group: travis_latest
 sudo: required
+
+addons:
+  apt:
+    packages:
+      - docker-ce
 
 branches:
   only:
@@ -22,11 +28,9 @@ env:
       DOCKER_VERSION="`curl -s https://raw.githubusercontent.com/tianon/docker-brew-ubuntu-core/master/rolling`"
 
 before_install:
-  - sudo apt-get update -q
-  - sudo apt-get upgrade -q -y
   - docker version
   
-install:
+before_script:
   - sed -i -e '/^$/d' -e 's/^[ \t]*//' -e '/^#/d' Dockerfile
 
 script:

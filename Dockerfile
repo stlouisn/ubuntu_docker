@@ -9,10 +9,6 @@ RUN \
     # Update and upgrade
     apt-get update && apt-get upgrade -y && \
 
-    # Install tzdata
-    apt-get install -y --no-install-recommends \
-        tzdata && \
-
     # Install SSL
     apt-get install -y --no-install-recommends \
         ca-certificates \

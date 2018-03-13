@@ -25,7 +25,7 @@ RUN \
     # Install gosu
     apt-get install -y --no-install-recommends \
         gosu && \
-        
+
     # Install shell tools
     apt install -y --no-install-recommends \
         nano \

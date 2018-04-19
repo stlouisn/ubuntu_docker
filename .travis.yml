@@ -37,7 +37,7 @@ script:
   - docker build --tag ${DOCKER_USERNAME}/${DOCKER_NAME}:temp --pull .
   - docker create --name ubuntu ${DOCKER_USERNAME}/${DOCKER_NAME}:temp /bin/bash -c exit
   - docker export -o ubuntu-image.tar `docker ps -a | grep ubuntu  | awk -F ' ' {'print $1'}`
-  - docker import ubuntu-image.tar --change "LABEL org.label-schema.build-date='$BUILD_DATE' org.label-schema.build-number='$BUILD_NUMBER' org.label-schema.description='$DOCKER_DESCRIPTION' org.label-schema.maintainer='$DOCKER_MAINTAINER' org.label-schema.name='$DOCKER_NAME' org.label-schema.url='$DOCKER_URL' org.label-schema.version='$DOCKER_VERSION' org.label-schema.schema-version='$SCHEMA_VERSION' org.label-schema.vcs-ref='$VCS_REF' org.label-schema.vcs-url='$VCS_URL'" ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
+  - docker import ubuntu-image.tar --message "stlouisn/ubuntu:rolling" --change "LABEL org.label-schema.build-date='$BUILD_DATE' org.label-schema.build-number='$BUILD_NUMBER' org.label-schema.description='$DOCKER_DESCRIPTION' org.label-schema.maintainer='$DOCKER_MAINTAINER' org.label-schema.name='$DOCKER_NAME' org.label-schema.url='$DOCKER_URL' org.label-schema.version='$DOCKER_VERSION' org.label-schema.schema-version='$SCHEMA_VERSION' org.label-schema.vcs-ref='$VCS_REF' org.label-schema.vcs-url='$VCS_URL'" ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
 
 after_success:
   - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin

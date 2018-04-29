@@ -42,6 +42,14 @@ script:
 after_success:
   - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
   - docker push ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
+  >
+    curl -X POST
+    -H "Content-Type: application/json"
+    -H "Travis-API-Version: 3"
+    -H "Accept: applcation/json"
+    -H "Authorization: token ${TRAVIS_API_TOKEN}"
+    -d '{"request": {"message": "new base image", "branch": "master"}}'
+    'https://api.travis-ci.org/repo/stlouisn%2Ftraefik_docker/requests'
 
 notifications:
   email:

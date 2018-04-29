@@ -42,7 +42,7 @@ script:
 after_success:
   - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
   - docker push ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
-  >
+  - >
     curl -X POST
     -H "Content-Type: application/json"
     -H "Travis-API-Version: 3"

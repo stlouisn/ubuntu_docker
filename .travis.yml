@@ -48,7 +48,15 @@ after_success:
     -H "Travis-API-Version: 3"
     -H "Accept: applcation/json"
     -H "Authorization: token ${TRAVIS_API_TOKEN}"
-    -d '{"request": {"message": "new base image", "branch": "master"}}'
+    -d '{"request": {"message": "Update stlouisn/ubuntu:rolling", "branch": "master"}}'
+    'https://api.travis-ci.org/repo/stlouisn%2Fairsonic_docker/requests'
+  - >
+    curl -X POST
+    -H "Content-Type: application/json"
+    -H "Travis-API-Version: 3"
+    -H "Accept: applcation/json"
+    -H "Authorization: token ${TRAVIS_API_TOKEN}"
+    -d '{"request": {"message": "Update stlouisn/ubuntu:rolling", "branch": "master"}}'
     'https://api.travis-ci.org/repo/stlouisn%2Ftraefik_docker/requests'
 
 notifications:

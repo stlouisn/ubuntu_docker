@@ -48,15 +48,63 @@ after_success:
     -H "Travis-API-Version: 3"
     -H "Accept: applcation/json"
     -H "Authorization: token ${TRAVIS_API_TOKEN}"
-    -d '{"request": {"message": "Update stlouisn/ubuntu:rolling", "branch": "master"}}'
-    'https://api.travis-ci.org/repo/stlouisn%2Fairsonic_docker/requests'
+    -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
+    'https://api.travis-ci.org/repo/stlouisn%2Fjava_docker/requests'
   - >
     curl -X POST
     -H "Content-Type: application/json"
     -H "Travis-API-Version: 3"
     -H "Accept: applcation/json"
     -H "Authorization: token ${TRAVIS_API_TOKEN}"
-    -d '{"request": {"message": "Update stlouisn/ubuntu:rolling", "branch": "master"}}'
+    -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
+    'https://api.travis-ci.org/repo/stlouisn%2Fbeets_docker/requests'
+  - >
+    curl -X POST
+    -H "Content-Type: application/json"
+    -H "Travis-API-Version: 3"
+    -H "Accept: applcation/json"
+    -H "Authorization: token ${TRAVIS_API_TOKEN}"
+    -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
+    'https://api.travis-ci.org/repo/stlouisn%2Fhome-assistant_docker/requests'
+  - >
+    curl -X POST
+    -H "Content-Type: application/json"
+    -H "Travis-API-Version: 3"
+    -H "Accept: applcation/json"
+    -H "Authorization: token ${TRAVIS_API_TOKEN}"
+    -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
+    'https://api.travis-ci.org/repo/stlouisn%2Flidarr_docker/requests'
+  - >
+    curl -X POST
+    -H "Content-Type: application/json"
+    -H "Travis-API-Version: 3"
+    -H "Accept: applcation/json"
+    -H "Authorization: token ${TRAVIS_API_TOKEN}"
+    -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
+    'https://api.travis-ci.org/repo/stlouisn%2Fopenvpn_docker/requests'
+  - >
+    curl -X POST
+    -H "Content-Type: application/json"
+    -H "Travis-API-Version: 3"
+    -H "Accept: applcation/json"
+    -H "Authorization: token ${TRAVIS_API_TOKEN}"
+    -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
+    'https://api.travis-ci.org/repo/stlouisn%2Fsonarr_docker/requests'
+  - >
+    curl -X POST
+    -H "Content-Type: application/json"
+    -H "Travis-API-Version: 3"
+    -H "Accept: applcation/json"
+    -H "Authorization: token ${TRAVIS_API_TOKEN}"
+    -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
+    'https://api.travis-ci.org/repo/stlouisn%2Fsurveillance_docker/requests'
+  - >
+    curl -X POST
+    -H "Content-Type: application/json"
+    -H "Travis-API-Version: 3"
+    -H "Accept: applcation/json"
+    -H "Authorization: token ${TRAVIS_API_TOKEN}"
+    -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
     'https://api.travis-ci.org/repo/stlouisn%2Ftraefik_docker/requests'
 
 notifications:

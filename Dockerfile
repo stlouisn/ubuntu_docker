@@ -46,6 +46,7 @@ RUN \
         /usr/games \
         /usr/local/games \
         /srv \
+        /var/log/* \
         /var/opt && \
 
     # Clean apt-cache

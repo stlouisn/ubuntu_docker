@@ -64,6 +64,16 @@ after_success:
     -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
     'https://api.travis-ci.org/repo/stlouisn%2Fbeets_docker/requests'
 
+  # Trigger duckdns_docker build
+  - >
+    curl -X POST
+    -H "Content-Type: application/json"
+    -H "Travis-API-Version: 3"
+    -H "Accept: applcation/json"
+    -H "Authorization: token ${TRAVIS_API_TOKEN}"
+    -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
+    'https://api.travis-ci.org/repo/stlouisn%2Fduckdns_docker/requests'
+
   # Trigger home-assistant_docker build
   - >
     curl -X POST
@@ -103,16 +113,6 @@ after_success:
     -H "Authorization: token ${TRAVIS_API_TOKEN}"
     -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
     'https://api.travis-ci.org/repo/stlouisn%2Fsonarr_docker/requests'
-
-  # Trigger surveillance_docker build
-  - >
-    curl -X POST
-    -H "Content-Type: application/json"
-    -H "Travis-API-Version: 3"
-    -H "Accept: applcation/json"
-    -H "Authorization: token ${TRAVIS_API_TOKEN}"
-    -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
-    'https://api.travis-ci.org/repo/stlouisn%2Fsurveillance_docker/requests'
 
   # Trigger traefik_docker build
   - >

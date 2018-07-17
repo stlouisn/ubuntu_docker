@@ -29,7 +29,9 @@ env:
 
 before_install:
   - docker version
-  
+
+install:
+
 before_script:
   - sed -i -e '/^$/d' -e 's/^[ \t]*//' -e '/^#/d' Dockerfile
   - sudo /sbin/sysctl -w net.ipv4.conf.all.forwarding=1

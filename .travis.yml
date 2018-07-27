@@ -66,6 +66,8 @@ after_success:
     -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
     'https://api.travis-ci.org/repo/stlouisn%2Fbeets_docker/requests'
 
+  # Trigger collabora_docker build
+
   # Trigger home-assistant_docker build
   - >
     curl -X POST
@@ -85,6 +87,8 @@ after_success:
     -H "Authorization: token ${TRAVIS_API_TOKEN}"
     -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
     'https://api.travis-ci.org/repo/stlouisn%2Flidarr_docker/requests'
+
+  # Trigger nextcloud_docker build
 
   # Trigger openvpn_docker build
   - >

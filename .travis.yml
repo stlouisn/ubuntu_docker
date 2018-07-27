@@ -51,7 +51,7 @@ after_success:
     curl -X POST
     -H "Content-Type: application/json"
     -H "Travis-API-Version: 3"
-    -H "Accept: applcation/json"
+    -H "Accept: application/json"
     -H "Authorization: token ${TRAVIS_API_TOKEN}"
     -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
     'https://api.travis-ci.org/repo/stlouisn%2Fjava_docker/requests'
@@ -61,7 +61,7 @@ after_success:
     curl -X POST
     -H "Content-Type: application/json"
     -H "Travis-API-Version: 3"
-    -H "Accept: applcation/json"
+    -H "Accept: application/json"
     -H "Authorization: token ${TRAVIS_API_TOKEN}"
     -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
     'https://api.travis-ci.org/repo/stlouisn%2Fbeets_docker/requests'
@@ -73,7 +73,7 @@ after_success:
     curl -X POST
     -H "Content-Type: application/json"
     -H "Travis-API-Version: 3"
-    -H "Accept: applcation/json"
+    -H "Accept: application/json"
     -H "Authorization: token ${TRAVIS_API_TOKEN}"
     -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
     'https://api.travis-ci.org/repo/stlouisn%2Fhome-assistant_docker/requests'
@@ -83,7 +83,7 @@ after_success:
     curl -X POST
     -H "Content-Type: application/json"
     -H "Travis-API-Version: 3"
-    -H "Accept: applcation/json"
+    -H "Accept: application/json"
     -H "Authorization: token ${TRAVIS_API_TOKEN}"
     -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
     'https://api.travis-ci.org/repo/stlouisn%2Flidarr_docker/requests'
@@ -95,7 +95,7 @@ after_success:
     curl -X POST
     -H "Content-Type: application/json"
     -H "Travis-API-Version: 3"
-    -H "Accept: applcation/json"
+    -H "Accept: application/json"
     -H "Authorization: token ${TRAVIS_API_TOKEN}"
     -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
     'https://api.travis-ci.org/repo/stlouisn%2Fopenvpn_docker/requests'
@@ -105,7 +105,7 @@ after_success:
     curl -X POST
     -H "Content-Type: application/json"
     -H "Travis-API-Version: 3"
-    -H "Accept: applcation/json"
+    -H "Accept: application/json"
     -H "Authorization: token ${TRAVIS_API_TOKEN}"
     -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
     'https://api.travis-ci.org/repo/stlouisn%2Fsonarr_docker/requests'
@@ -115,7 +115,7 @@ after_success:
     curl -X POST
     -H "Content-Type: application/json"
     -H "Travis-API-Version: 3"
-    -H "Accept: applcation/json"
+    -H "Accept: application/json"
     -H "Authorization: token ${TRAVIS_API_TOKEN}"
     -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
     'https://api.travis-ci.org/repo/stlouisn%2Ftraefik_docker/requests'

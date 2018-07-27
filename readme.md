@@ -19,8 +19,8 @@ Ubuntu Rolling Base Image
 
 ### Tags
 
-[![Version](https://images.microbadger.com/badges/version/stlouisn/ubuntu:default.svg)][microbadger_url]
-[![Layers](https://images.microbadger.com/badges/image/stlouisn/ubuntu:default.svg)][microbadger_url]
+[![Version](https://images.microbadger.com/badges/version/stlouisn/ubuntu:rolling.svg)][microbadger_url]
+[![Layers](https://images.microbadger.com/badges/image/stlouisn/ubuntu:rolling.svg)][microbadger_url]
 
 ### Feature Requests
 

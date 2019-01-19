@@ -28,6 +28,7 @@ RUN \
 
     # Install shell tools
     apt install -y --no-install-recommends \
+        bash-completion \
         nano \
         tree && \
 

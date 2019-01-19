@@ -46,7 +46,7 @@ after_success:
   - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
   - docker push ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
 
-  # Trigger java_docker build
+  # Trigger java_docker build (airsonic, unifi)
   - >
     curl -X POST
     -H "Content-Type: application/json"
@@ -56,17 +56,9 @@ after_success:
     -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
     'https://api.travis-ci.org/repo/stlouisn%2Fjava_docker/requests'
 
-  # Trigger beets_docker build
-  - >
-    curl -X POST
-    -H "Content-Type: application/json"
-    -H "Travis-API-Version: 3"
-    -H "Accept: application/json"
-    -H "Authorization: token ${TRAVIS_API_TOKEN}"
-    -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
-    'https://api.travis-ci.org/repo/stlouisn%2Fbeets_docker/requests'
+  # Trigger python_docker build (beets, home-assistant)
 
-  # Trigger collabora_docker build
+  # Trigger mono_docker build (bazaar, lidarr, radarr, sonarr)
 
   # Trigger home-assistant_docker build
   - >
@@ -78,7 +70,9 @@ after_success:
     -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
     'https://api.travis-ci.org/repo/stlouisn%2Fhome-assistant_docker/requests'
 
-  # Trigger lidarr_docker build
+  # Trigger nextcloud_docker build
+
+  # Trigger traefik_docker build
   - >
     curl -X POST
     -H "Content-Type: application/json"
@@ -86,9 +80,9 @@ after_success:
     -H "Accept: application/json"
     -H "Authorization: token ${TRAVIS_API_TOKEN}"
     -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
-    'https://api.travis-ci.org/repo/stlouisn%2Flidarr_docker/requests'
+    'https://api.travis-ci.org/repo/stlouisn%2Ftraefik_docker/requests'
 
-  # Trigger nextcloud_docker build
+  # Trigger pi-hole_docker build
 
   # Trigger openvpn_docker build
   - >
@@ -110,7 +104,7 @@ after_success:
     -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
     'https://api.travis-ci.org/repo/stlouisn%2Fsonarr_docker/requests'
 
-  # Trigger traefik_docker build
+  # Trigger lidarr_docker build
   - >
     curl -X POST
     -H "Content-Type: application/json"
@@ -118,7 +112,17 @@ after_success:
     -H "Accept: application/json"
     -H "Authorization: token ${TRAVIS_API_TOKEN}"
     -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
-    'https://api.travis-ci.org/repo/stlouisn%2Ftraefik_docker/requests'
+    'https://api.travis-ci.org/repo/stlouisn%2Flidarr_docker/requests'
+
+  # Trigger beets_docker build
+  - >
+    curl -X POST
+    -H "Content-Type: application/json"
+    -H "Travis-API-Version: 3"
+    -H "Accept: application/json"
+    -H "Authorization: token ${TRAVIS_API_TOKEN}"
+    -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
+    'https://api.travis-ci.org/repo/stlouisn%2Fbeets_docker/requests'
 
 notifications:
   email:

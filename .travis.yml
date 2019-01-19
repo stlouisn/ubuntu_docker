@@ -59,7 +59,25 @@ after_success:
 
   # Trigger mono_docker build (bazaar, lidarr, radarr, sonarr)
 
-  # Trigger nextcloud_docker build
+  # Trigger sonarr_docker build
+  - >
+    curl -X POST
+    -H "Content-Type: application/json"
+    -H "Travis-API-Version: 3"
+    -H "Accept: application/json"
+    -H "Authorization: token ${TRAVIS_API_TOKEN}"
+    -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
+    'https://api.travis-ci.org/repo/stlouisn%2Fsonarr_docker/requests'
+
+  # Trigger lidarr_docker build
+  - >
+    curl -X POST
+    -H "Content-Type: application/json"
+    -H "Travis-API-Version: 3"
+    -H "Accept: application/json"
+    -H "Authorization: token ${TRAVIS_API_TOKEN}"
+    -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
+    'https://api.travis-ci.org/repo/stlouisn%2Flidarr_docker/requests'
 
   # Trigger traefik_docker build
   - >
@@ -83,25 +101,7 @@ after_success:
     -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
     'https://api.travis-ci.org/repo/stlouisn%2Fopenvpn_docker/requests'
 
-  # Trigger sonarr_docker build
-  - >
-    curl -X POST
-    -H "Content-Type: application/json"
-    -H "Travis-API-Version: 3"
-    -H "Accept: application/json"
-    -H "Authorization: token ${TRAVIS_API_TOKEN}"
-    -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
-    'https://api.travis-ci.org/repo/stlouisn%2Fsonarr_docker/requests'
-
-  # Trigger lidarr_docker build
-  - >
-    curl -X POST
-    -H "Content-Type: application/json"
-    -H "Travis-API-Version: 3"
-    -H "Accept: application/json"
-    -H "Authorization: token ${TRAVIS_API_TOKEN}"
-    -d '{"request": {"message": "Push from stlouisn/ubuntu:rolling", "branch": "master"}}'
-    'https://api.travis-ci.org/repo/stlouisn%2Flidarr_docker/requests'
+  # Trigger nextcloud_docker build
 
 notifications:
   email:

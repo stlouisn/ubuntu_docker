@@ -18,6 +18,7 @@ env:
   global:
     - DOCKER_MAINTAINER="stlouisn"
     - DOCKER_NAME="ubuntu"
+  matrix:
     - DOCKER_TAG="rolling"
 
 before_install:

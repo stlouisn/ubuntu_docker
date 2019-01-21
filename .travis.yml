@@ -48,7 +48,6 @@ jobs:
       install: skip
       before_script: skip
       script:
-
       # Trigger java_docker build
       - >
         curl -X POST
@@ -58,7 +57,6 @@ jobs:
         -H "Authorization: token ${TRAVIS_API_TOKEN}"
         -d '{"request": {"message": "Push from stlouisn/ubuntu", "branch": "master"}}'
         'https://api.travis-ci.org/repo/stlouisn%2Fjava_docker/requests'
-
       # Trigger python_docker build
       - >
         curl -X POST
@@ -68,7 +66,6 @@ jobs:
         -H "Authorization: token ${TRAVIS_API_TOKEN}"
         -d '{"request": {"message": "Push from stlouisn/ubuntu", "branch": "master"}}'
         'https://api.travis-ci.org/repo/stlouisn%2Fpython_docker/requests'
-
 #      # Trigger mono_docker build
 #      - >
 #        curl -X POST
@@ -78,7 +75,6 @@ jobs:
 #        -H "Authorization: token ${TRAVIS_API_TOKEN}"
 #        -d '{"request": {"message": "Push from stlouisn/ubuntu", "branch": "master"}}'
 #        'https://api.travis-ci.org/repo/stlouisn%2Fmono_docker/requests'
-
       # Trigger traefik_docker build
       - >
         curl -X POST
@@ -88,9 +84,7 @@ jobs:
         -H "Authorization: token ${TRAVIS_API_TOKEN}"
         -d '{"request": {"message": "Push from stlouisn/ubuntu", "branch": "master"}}'
         'https://api.travis-ci.org/repo/stlouisn%2Ftraefik_docker/requests'
-
 #      # Trigger pi-hole_docker build
-
       # Trigger openvpn_docker build
       - >
         curl -X POST
@@ -100,7 +94,6 @@ jobs:
         -H "Authorization: token ${TRAVIS_API_TOKEN}"
         -d '{"request": {"message": "Push from stlouisn/ubuntu", "branch": "master"}}'
         'https://api.travis-ci.org/repo/stlouisn%2Fopenvpn_docker/requests'
-
 #      # Trigger nextcloud_docker build
 #      - >
 #        curl -X POST
@@ -110,7 +103,6 @@ jobs:
 #        -H "Authorization: token ${TRAVIS_API_TOKEN}"
 #        -d '{"request": {"message": "Push from stlouisn/ubuntu", "branch": "master"}}'
 #        'https://api.travis-ci.org/repo/stlouisn%2Fnextcloud_docker/requests'
-
       after_success: skip
 
 notifications:

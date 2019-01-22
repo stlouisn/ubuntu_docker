@@ -3,20 +3,30 @@ dist: trusty
 group: travis_latest
 sudo: required
 
+if: |
+  branch = master AND \
+  NOT commit_message =~ /readme.md/ AND \
+  NOT commit_message =~ /docker-compose.yml/
+
 addons:
   apt:
     packages:
       - docker-ce
 
-branches:
-  only:
-    - master
-
 env:
   global:
+    - BUILD_DATE="`date -u +%Y-%m-%dT%H:%M:%SZ`"
+    - BUILD_NUMBER="$TRAVIS_BUILD_NUMBER"
+    - DOCKER_DESCRIPTION="ubuntu base image"
     - DOCKER_MAINTAINER="stlouisn"
     - DOCKER_NAME="ubuntu"
+    - DOCKER_URL="https://www.ubuntu.com/"
+    - SCHEMA_VERSION="1.0"	
+    - VCS_REF="`git rev-parse --short HEAD`"	
+    - VCS_URL="`git remote get-url origin | head -c-5`"
+  matrix:
     - DOCKER_TAG="rolling"
+      DOCKER_VERSION="`curl -s https://raw.githubusercontent.com/tianon/docker-brew-ubuntu-core/master/rolling`"
 
 before_install:
   - docker version

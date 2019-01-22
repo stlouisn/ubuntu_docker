@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# LSB_RELEASE
-export `cat /etc/lsb-release | grep -v DESCRIPTION`
-
 # Default language
 export LC_ALL=C.UTF-8
 

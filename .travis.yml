@@ -41,7 +41,7 @@ script:
   - docker build --tag ${DOCKER_USERNAME}/${DOCKER_NAME}:temp --pull .
   - docker create --name ubuntu ${DOCKER_USERNAME}/${DOCKER_NAME}:temp /bin/bash -c exit
   - docker export -o ubuntu-image.tar `docker ps -a | grep ubuntu  | awk -F ' ' {'print $1'}`
-  - docker import ubuntu-image.tar --message "stlouisn/ubuntu:rolling"
+  - docker import ubuntu-image.tar --message "stlouisn/ubuntu:rolling" ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
 
 after_success:
   - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin

@@ -6,8 +6,11 @@ RUN \
 
     export DEBIAN_FRONTEND=noninteractive && \
 
-    # Update and upgrade
-    apt-get update && apt-get upgrade -y && \
+    # Update apt-cache
+    apt-get update && \
+
+    # Upgrade all packages
+    apt-get upgrade -y && \
 
     # Install tzdata
     apt-get install -y --no-install-recommends \

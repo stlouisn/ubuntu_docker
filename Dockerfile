@@ -64,3 +64,5 @@ RUN \
         /root/.wget-hsts \
         /tmp/* \
         /var/lib/apt/lists/*
+
+ENTRYPOINT ["/bin/bash", "-l"]

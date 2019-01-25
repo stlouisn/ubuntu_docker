@@ -26,7 +26,7 @@ env:
     - VCS_URL="`git remote get-url origin | head -c-5`"
   matrix:
     - DOCKER_TAG="rolling"
-      DOCKER_VERSION="`curl -s https://raw.githubusercontent.com/tianon/docker-brew-ubuntu-core/master/rolling`"
+      DOCKER_VERSION=$(curl -sL https://raw.githubusercontent.com/tianon/docker-brew-ubuntu-core/master/rolling)
 
 before_install:
   - docker version

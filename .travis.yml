@@ -15,18 +15,18 @@ addons:
 
 env:
   global:
-    - BUILD_DATE="`date -u +%Y-%m-%dT%H:%M:%SZ`"
-    - BUILD_NUMBER="$TRAVIS_BUILD_NUMBER"
+    - BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+    - BUILD_NUMBER="${TRAVIS_BUILD_NUMBER}"
     - DOCKER_DESCRIPTION="ubuntu base image"
     - DOCKER_MAINTAINER="stlouisn"
     - DOCKER_NAME="ubuntu"
     - DOCKER_URL="https://www.ubuntu.com/"
-    - SCHEMA_VERSION="1.0"	
-    - VCS_REF="`git rev-parse --short HEAD`"	
-    - VCS_URL="`git remote get-url origin | head -c-5`"
+    - SCHEMA_VERSION="1.0"
+    - VCS_REF="$(git rev-parse --short HEAD)"
+    - VCS_URL="$(git remote get-url origin | head -c-5)"
   matrix:
     - DOCKER_TAG="rolling"
-      DOCKER_VERSION=$(curl -sL https://raw.githubusercontent.com/tianon/docker-brew-ubuntu-core/master/rolling)
+      DOCKER_VERSION="$(curl -sL https://raw.githubusercontent.com/tianon/docker-brew-ubuntu-core/master/rolling)"
 
 before_install:
   - docker version

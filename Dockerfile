@@ -65,4 +65,4 @@ RUN \
         /tmp/* \
         /var/lib/apt/lists/*
 
-ENTRYPOINT ["/bin/bash", "-l"]
+CMD ["/bin/bash", "-l"]

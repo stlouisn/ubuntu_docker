@@ -55,7 +55,6 @@ RUN \
 
     # Clean apt-cache
     apt-get autoremove -y --purge && \
-    apt-get clean -y && \
     apt-get autoclean -y && \
 
     # Cleanup temporary folders

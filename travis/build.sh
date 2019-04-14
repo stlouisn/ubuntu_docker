@@ -2,7 +2,7 @@
 
 set -x
 
-set -euo pipefail
+#set -euo pipefail
 
 # Enable docker experimental client
 export DOCKER_CLI_EXPERIMENTAL="enabled"
@@ -15,6 +15,7 @@ architectures="arm arm64 amd64"
 for arch in $architectures
 do
 	buildctl build \
+		--progress=plain \
 		--frontend dockerfile.v0 \
 		--opt platform=linux/$arch \
 		--opt filename=./Dockerfile.$arch \

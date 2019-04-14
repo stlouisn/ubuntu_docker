@@ -13,21 +13,22 @@ architectures="arm arm64 amd64"
 for arch in $architectures
 do
 	buildctl build \
-		--progress=plain \
 		--frontend dockerfile.v0 \
 		--opt platform=linux/$arch \
 		--opt filename=./Dockerfile.$arch \
 		--local dockerfile=. \
 		--local context=. \
-		--output type=docker,name=tmp-image-$arch \| docker load
-
-	docker create --name tmp-container-$arch tmp-image-$arch /bin/bash -c exit
+		--output type=docker,name=tmp-image-$arch > tmp-image-$arch.tar
 	
-	docker export -o tmp-file-$arch.tar tmp-container-$arch
+	docker load -i tmp-image-$arch.tar
+
+	docker create --name tmp-image-$arch tmp-image-$arch '/bin/bash -c exit'
+	
+	docker export -o import-image-$arch.tar tmp-image-$arch
 
 	docker import \
-		tmp-file-$arch.tar \
-		--message "Imported from ${DOCKER_NAME}/${DOCKER_TAG}" \
+		import-image-$arch.tar \
+		--message 'Imported from ${DOCKER_NAME}/${DOCKER_TAG}' \
 		${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-$arch
 
 	docker push ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-$arch

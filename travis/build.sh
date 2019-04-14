@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-#set -euo pipefail
+set -euo pipefail
 
 # Enable docker experimental client
-#export DOCKER_CLI_EXPERIMENTAL="enabled"
+export DOCKER_CLI_EXPERIMENTAL="enabled"
 
 # Login into docker
-echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
+echo ${DOCKER_PASSWORD} \| docker login --username ${DOCKER_USERNAME} --password-stdin
 
 architectures="arm arm64 amd64"
 
@@ -18,7 +18,7 @@ do
 		--opt filename=./Dockerfile.$arch \
 		--local dockerfile=. \
 		--local context=. \
-		--output type=docker,name=tmp-image-$arch | docker load
+		--output type=docker,name=tmp-image-$arch \| docker load
 
 	docker create --name tmp-image-$arch tmp-image-$arch '/bin/bash -c exit'
 	

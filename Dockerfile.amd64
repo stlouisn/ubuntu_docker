@@ -1,4 +1,4 @@
-FROM ubuntu:rolling
+FROM amd64/ubuntu:rolling
 
 COPY rootfs /
 

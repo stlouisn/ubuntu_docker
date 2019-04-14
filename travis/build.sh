@@ -8,21 +8,19 @@ set -x
 export DOCKER_CLI_EXPERIMENTAL="enabled"
 
 # Login into docker
-echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
+echo ${DOCKER_PASSWORD} \| docker login --username ${DOCKER_USERNAME} --password-stdin
 
 architectures="arm arm64 amd64"
 
 for arch in $architectures
 do
 	buildctl build \
-		--progress=plain \
 		--frontend dockerfile.v0 \
 		--opt platform=linux/$arch \
 		--opt filename=./Dockerfile.$arch \
 		--local dockerfile=. \
 		--local context=. \
-		--output type=docker,name=tmp-image-$arch \
-		| docker load
+		--output type=docker,name=tmp-image-$arch | docker load
 
 	docker create --name tmp-container-$arch tmp-image-$arch /bin/bash -c exit
 	

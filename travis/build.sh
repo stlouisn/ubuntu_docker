@@ -22,7 +22,6 @@ do
 
 	docker import \
 		${DOCKER_TAG}-$arch.tar \
-		--platform $arch \
 		--change "CMD /bin/bash -l"
 		--message "${DOCKER_NAME}:${DOCKER_TAG}-$arch" \
 		${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-$arch

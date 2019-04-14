@@ -16,82 +16,39 @@ addons:
 
 env:
   global:
+    - ARCHITECTURES="arm armhf arm64 amd64"
     - BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
     - BUILD_NUMBER="${TRAVIS_BUILD_NUMBER}"
     - DOCKER_DESCRIPTION="ubuntu base image"
     - DOCKER_MAINTAINER="stlouisn"
     - DOCKER_NAME="ubuntu"
+    - DOCKER_TAG="rolling"
     - DOCKER_URL="https://www.ubuntu.com/"
     - SCHEMA_VERSION="1.0"
+    - UBUNTU_CODENAME="$(curl -sL https://raw.githubusercontent.com/tianon/docker-brew-ubuntu-core/master/rolling)"
     - VCS_REF="$(git rev-parse --short HEAD)"
     - VCS_URL="$(git remote get-url origin | head -c-5)"
-  matrix:
-    - DOCKER_TAG="rolling"
-      DOCKER_VERSION="$(curl -sL https://raw.githubusercontent.com/tianon/docker-brew-ubuntu-core/master/rolling)"
 
 before_install:
-  - docker version
   - sudo /sbin/sysctl -w net.ipv4.conf.all.forwarding=1
+  - docker version
 
 install:
+  - sudo docker run --privileged linuxkit/binfmt:v0.6
+  - sudo docker run --privileged -d -p 1234:1234 --name buildkit moby/buildkit:latest --addr tcp://0.0.0.0:1234 --oci-worker-platform linux/arm --oci-worker-platform linux/armhf --oci-worker-platform linux/arm64 --oci-worker-platform linux/amd64
+  - sudo docker cp buildkit:/usr/bin/buildctl /usr/bin/
+  - export BUILDKIT_HOST=tcp://0.0.0.0:1234
 
 before_script:
-  - sed -i -e '/^$/d' -e 's/^[ \t]*//' -e '/^#/d' Dockerfile
+  - sed -i -e '/^$/d' -e 's/^[ \t]*//' -e '/^#/d' Dockerfile*
+  #- chmod 0544 rootfs/usr/local/bin/docker_entrypoint.sh
 
 script:
-  - docker build --tag ${DOCKER_USERNAME}/${DOCKER_NAME}:temp --pull .
-  - docker create --name ubuntu ${DOCKER_USERNAME}/${DOCKER_NAME}:temp /bin/bash -c exit
-  - docker export -o ubuntu-image.tar `docker ps -a | grep ubuntu  | awk -F ' ' {'print $1'}`
-  - docker import ubuntu-image.tar --message "${DOCKER_NAME}:${DOCKER_TAG}" ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
+  - sudo bash ./travis/build.sh
+  - sudo bash ./travis/deploy.sh
 
 after_success:
-  - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
-  - docker push ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}
-  # Trigger java_docker build
-  - >
-    curl -X POST
-    -H "Content-Type: application/json"
-    -H "Travis-API-Version: 3"
-    -H "Accept: application/json"
-    -H "Authorization: token ${TRAVIS_API_TOKEN}"
-    -d '{"request": {"message": "Push from stlouisn/ubuntu", "branch": "master"}}'
-    'https://api.travis-ci.org/repo/stlouisn%2Fjava_docker/requests'
-  # Trigger python_docker build
-  - >
-    curl -X POST
-    -H "Content-Type: application/json"
-    -H "Travis-API-Version: 3"
-    -H "Accept: application/json"
-    -H "Authorization: token ${TRAVIS_API_TOKEN}"
-    -d '{"request": {"message": "Push from stlouisn/ubuntu", "branch": "master"}}'
-    'https://api.travis-ci.org/repo/stlouisn%2Fpython_docker/requests'
-  # Trigger mono_docker build
-  - >
-    curl -X POST
-    -H "Content-Type: application/json"
-    -H "Travis-API-Version: 3"
-    -H "Accept: application/json"
-    -H "Authorization: token ${TRAVIS_API_TOKEN}"
-    -d '{"request": {"message": "Push from stlouisn/ubuntu", "branch": "master"}}'
-    'https://api.travis-ci.org/repo/stlouisn%2Fmono_docker/requests'
-  # Trigger traefik_docker build
-  - >
-    curl -X POST
-    -H "Content-Type: application/json"
-    -H "Travis-API-Version: 3"
-    -H "Accept: application/json"
-    -H "Authorization: token ${TRAVIS_API_TOKEN}"
-    -d '{"request": {"message": "Push from stlouisn/ubuntu", "branch": "master"}}'
-    'https://api.travis-ci.org/repo/stlouisn%2Ftraefik_docker/requests'
-  # Trigger openvpn_docker build
-  - >
-    curl -X POST
-    -H "Content-Type: application/json"
-    -H "Travis-API-Version: 3"
-    -H "Accept: application/json"
-    -H "Authorization: token ${TRAVIS_API_TOKEN}"
-    -d '{"request": {"message": "Push from stlouisn/ubuntu", "branch": "master"}}'
-    'https://api.travis-ci.org/repo/stlouisn%2Fopenvpn_docker/requests'
+  # Trigger builds
 
 notifications:
   email:

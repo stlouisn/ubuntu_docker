@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Enable docker experimental client
+export DOCKER_CLI_EXPERIMENTAL="enabled"
+
 # Login into docker
 echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
 

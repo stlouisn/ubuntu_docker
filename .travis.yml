@@ -16,7 +16,7 @@ addons:
 
 env:
   global:
-    - ARCHITECTURES="arm armhf arm64 amd64"
+    - ARCHITECTURES="arm arm64 amd64"
     - BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
     - BUILD_NUMBER="${TRAVIS_BUILD_NUMBER}"
     - DOCKER_DESCRIPTION="ubuntu base image"

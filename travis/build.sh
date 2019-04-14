@@ -21,25 +21,3 @@ do
 		--output type=oci,dest=${DOCKER_TAG}-$arch.tar
 	docker import ${DOCKER_TAG}-$arch.tar --message "${DOCKER_NAME}:${DOCKER_TAG}-$arch" ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-$arch
 done
-
-# Build and push ARM image
-#buildctl build \
-#	--frontend dockerfile.v0 \
-#	--opt platform=linux/arm \
-#	--opt filename=./Dockerfile.arm \
-#	--local dockerfile=. \
-#	--local context=. \
-#	--output type=oci,dest=${DOCKER_TAG}-arm.tar
-#docker import ${DOCKER_TAG}-arm.tar --message "${DOCKER_NAME}:${DOCKER_TAG}-arm" ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-arm
-
-# Build and push ARM64 image
-
-# Build and push AMD64 image
-#buildctl build \
-#	--frontend dockerfile.v0 \
-#	--opt platform=linux/amd64 \
-#	--opt filename=./Dockerfile.amd64 \
-#	--local dockerfile=. \
-#	--local context=. \
-#	--output type=oci,dest=${DOCKER_TAG}-amd64.tar
-#docker import ${DOCKER_TAG}-amd64.tar --message "${DOCKER_NAME}:${DOCKER_TAG}-amd64" ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-amd64

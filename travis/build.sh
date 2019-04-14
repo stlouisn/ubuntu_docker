@@ -20,5 +20,10 @@ do
 		--local context=. \
 		--output type=oci,dest=${DOCKER_TAG}-$arch.tar
 
-	docker import ${DOCKER_TAG}-$arch.tar --message "${DOCKER_NAME}:${DOCKER_TAG}-$arch" ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-$arch
+	docker import \
+		${DOCKER_TAG}-$arch.tar \
+		--message "${DOCKER_NAME}:${DOCKER_TAG}-$arch" \
+		${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-$arch
+
+	docker push ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-$arch
 done

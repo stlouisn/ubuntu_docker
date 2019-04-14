@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 # Enable docker experimental client
 export DOCKER_CLI_EXPERIMENTAL="enabled"
 

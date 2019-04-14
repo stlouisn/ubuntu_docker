@@ -21,5 +21,5 @@ buildctl build \
 	--opt filename=./Dockerfile.amd64 \
 	--local dockerfile=. \
 	--local context=. \
-	--output type=tar,dest=ubuntu-image.tar
+	--output type=tar > ubuntu-image.tar
 docker import ubuntu-image.tar --message "${DOCKER_NAME}:${DOCKER_TAG}-amd64" ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-amd64

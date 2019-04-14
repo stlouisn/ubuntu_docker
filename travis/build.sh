@@ -6,7 +6,7 @@ set -euo pipefail
 export DOCKER_CLI_EXPERIMENTAL="enabled"
 
 # Login into docker
-echo ${DOCKER_PASSWORD} \| docker login --username ${DOCKER_USERNAME} --password-stdin
+echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
 
 architectures="arm arm64 amd64"
 

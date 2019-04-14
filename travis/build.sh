@@ -13,6 +13,7 @@ architectures="arm arm64 amd64"
 for arch in $architectures
 do
 	buildctl build \
+		--progress=plain \
 		--frontend dockerfile.v0 \
 		--opt platform=linux/$arch \
 		--opt filename=./Dockerfile.$arch \

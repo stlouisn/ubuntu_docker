@@ -10,7 +10,7 @@ echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-
 
 # Create manifest list
 docker manifest create ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG} \
-	${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-arm32 \
+	${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-arm \
 #	${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-arm64 \
 	${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-amd64
 
@@ -18,7 +18,7 @@ docker manifest create ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG} \
 docker manifest annotate \
 	--arch arm --os linux \
 	${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG} \
-	${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-arm32
+	${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-arm
 #docker manifest annotate \
 #	--arch arm64 --os linux \
 #	${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG} \

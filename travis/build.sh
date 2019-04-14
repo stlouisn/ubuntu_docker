@@ -18,12 +18,16 @@ do
 		--opt filename=./Dockerfile.$arch \
 		--local dockerfile=. \
 		--local context=. \
-		--output type=oci,dest=${DOCKER_TAG}-$arch.tar
+		--output type=docker,name=tmp-image-$arch \
+		| docker load
+
+	docker create --name tmp-container-$arch tmp-image-$arch /bin/bash -c exit
+	
+	docker export -o tmp-file-$arch.tar tmp-container-$arch
 
 	docker import \
-		${DOCKER_TAG}-$arch.tar \
-		--change "CMD /bin/bash -l" \
-		--message "${DOCKER_NAME}:${DOCKER_TAG}-$arch" \
+		tmp-file-$arch.tar \
+		--message "Imported from ${DOCKER_NAME}/${DOCKER_TAG}" \
 		${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-$arch
 
 	docker push ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-$arch

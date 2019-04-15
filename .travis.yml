@@ -49,51 +49,7 @@ script:
   - sudo bash ./travis/deploy.sh
 
 after_success:
-  # Trigger java_docker build
-  - >
-    curl -X POST
-    -H "Content-Type: application/json"
-    -H "Travis-API-Version: 3"
-    -H "Accept: application/json"
-    -H "Authorization: token ${TRAVIS_API_TOKEN}"
-    -d '{"request": {"message": "Push from stlouisn/ubuntu", "branch": "master"}}'
-    'https://api.travis-ci.org/repo/stlouisn%2Fjava_docker/requests'
-  # Trigger python_docker build
-  - >
-    curl -X POST
-    -H "Content-Type: application/json"
-    -H "Travis-API-Version: 3"
-    -H "Accept: application/json"
-    -H "Authorization: token ${TRAVIS_API_TOKEN}"
-    -d '{"request": {"message": "Push from stlouisn/ubuntu", "branch": "master"}}'
-    'https://api.travis-ci.org/repo/stlouisn%2Fpython_docker/requests'
-  # Trigger mono_docker build
-  - >
-    curl -X POST
-    -H "Content-Type: application/json"
-    -H "Travis-API-Version: 3"
-    -H "Accept: application/json"
-    -H "Authorization: token ${TRAVIS_API_TOKEN}"
-    -d '{"request": {"message": "Push from stlouisn/ubuntu", "branch": "master"}}'
-    'https://api.travis-ci.org/repo/stlouisn%2Fmono_docker/requests'
-  # Trigger traefik_docker build
-  - >
-    curl -X POST
-    -H "Content-Type: application/json"
-    -H "Travis-API-Version: 3"
-    -H "Accept: application/json"
-    -H "Authorization: token ${TRAVIS_API_TOKEN}"
-    -d '{"request": {"message": "Push from stlouisn/ubuntu", "branch": "master"}}'
-    'https://api.travis-ci.org/repo/stlouisn%2Ftraefik_docker/requests'
-  # Trigger openvpn_docker build
-  - >
-    curl -X POST
-    -H "Content-Type: application/json"
-    -H "Travis-API-Version: 3"
-    -H "Accept: application/json"
-    -H "Authorization: token ${TRAVIS_API_TOKEN}"
-    -d '{"request": {"message": "Push from stlouisn/ubuntu", "branch": "master"}}'
-    'https://api.travis-ci.org/repo/stlouisn%2Fopenvpn_docker/requests'
+  - sudo bash ./travis/trigger.sh
 
 notifications:
   email:

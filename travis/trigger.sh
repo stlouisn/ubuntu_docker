@@ -1,4 +1,7 @@
 # Builds to trigger
+
+set -x
+
 builds="java_docker python_docker mono_docker traefik_docker openvpn_docker"
 
 for build in $builds

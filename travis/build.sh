@@ -2,12 +2,6 @@
 
 set -euo pipefail
 
-# Enable docker experimental client
-export DOCKER_CLI_EXPERIMENTAL="enabled"
-
-# Login into docker
-echo ${DOCKER_PASSWORD} \| docker login --username ${DOCKER_USERNAME} --password-stdin
-
 architectures="arm arm64 amd64"
 
 for arch in $architectures
@@ -31,5 +25,6 @@ do
 		--message 'Imported from ${DOCKER_NAME}/${DOCKER_TAG}' \
 		${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-$arch
 
+	echo ${DOCKER_PASSWORD} \| docker login --username ${DOCKER_USERNAME} --password-stdin
 	docker push ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-$arch
 done

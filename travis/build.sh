@@ -12,7 +12,7 @@ do
 	buildctl build \
 		--frontend dockerfile.v0 \
 		--opt platform=linux/$arch \
-		--opt filename=./Dockerfile.$arch \
+		--opt filename=./Dockerfile.${DOCKER_TAG}-$arch \
 		--local dockerfile=. \
 		--local context=. \
 		--output type=docker,name=tmp-image-$arch,dest=tmp-image-$arch.tar

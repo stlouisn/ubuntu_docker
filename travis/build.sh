@@ -25,6 +25,6 @@ do
 		--message 'Imported from ${DOCKER_NAME}/${DOCKER_TAG}' \
 		${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-$arch
 
-	echo ${DOCKER_PASSWORD} \| docker login --username ${DOCKER_USERNAME} --password-stdin
+	echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
 	docker push ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-$arch
 done

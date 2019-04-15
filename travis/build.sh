@@ -18,7 +18,9 @@ do
 		--opt filename=./Dockerfile.$arch \
 		--local dockerfile=. \
 		--local context=. \
-		--output type=docker,name=tmp-image-$arch \| docker load
+		--output type=docker,name=tmp-image-$arch,dest=tmp-image-$arch.tar
+		
+	docker load -i tmp-image-$arch.tar
 
 	docker create --name tmp-image-$arch tmp-image-$arch '/bin/bash -c exit'
 	

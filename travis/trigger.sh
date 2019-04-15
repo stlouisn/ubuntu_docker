@@ -14,6 +14,6 @@ do
     -H "Accept: application/json" \
     -H "Authorization: token ${TRAVIS_API_TOKEN}" \
     -d '{"request": {"message": "Push from ${DOCKER_MAINTAINER}/${DOCKER_NAME}", "branch": "master"}}' \
-    'https://api.travis-ci.org/repo/${DOCKER_MAINTAINER}_$build/requests'
+    'https://api.travis-ci.org/repo/${DOCKER_MAINTAINER}/$build/requests'
 
 done

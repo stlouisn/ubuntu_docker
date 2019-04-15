@@ -1,11 +1,11 @@
-# mapping for home key
+# Mapping for home key
 "\e[1~": beginning-of-line
 
-# mapping for end key
+# Mapping for end key
 "\e[4~": end-of-line
 
-# mapping for pageup key
+# Mapping for pageup key
 "\e[5~": beginning-of-history
 
-# mapping for pagedown key
+# Mapping for pagedown key
 "\e[6~": end-of-history

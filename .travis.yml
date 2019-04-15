@@ -16,7 +16,6 @@ addons:
 
 env:
   global:
-    - ARCHITECTURES="arm arm64 amd64"
     - BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
     - BUILD_NUMBER="${TRAVIS_BUILD_NUMBER}"
     - DOCKER_DESCRIPTION="ubuntu base image"
@@ -24,11 +23,11 @@ env:
     - DOCKER_NAME="ubuntu"
     - DOCKER_URL="https://www.ubuntu.com/"
     - SCHEMA_VERSION="1.0"
-    - UBUNTU_CODENAME="$(curl -ksSL https://raw.githubusercontent.com/tianon/docker-brew-ubuntu-core/master/rolling)"
     - VCS_REF="$(git rev-parse --short HEAD)"
     - VCS_URL="$(git remote get-url origin | head -c-5)"
   matrix:
     - DOCKER_TAG="rolling"
+      UBUNTU_CODENAME="$(curl -ksSL https://raw.githubusercontent.com/tianon/docker-brew-ubuntu-core/master/rolling)"
       DOCKER_VERSION="$(curl -ksSL http://releases.ubuntu.com/${UBUNTU_CODENAME}/ | grep title | awk -F ' ' {'print $2'})"
 
 before_install:

@@ -23,13 +23,6 @@ Ubuntu Rolling Base Image
 [![Version](https://images.microbadger.com/badges/version/stlouisn/ubuntu:rolling.svg)][microbadger_url]
 [![Layers](https://images.microbadger.com/badges/image/stlouisn/ubuntu:rolling.svg)][microbadger_url]
 
-[![Version](https://images.microbadger.com/badges/version/stlouisn/ubuntu:rolling-arm.svg)][microbadger_url]
-[![Layers](https://images.microbadger.com/badges/image/stlouisn/ubuntu:rolling-arm.svg)][microbadger_url]
-[![Version](https://images.microbadger.com/badges/version/stlouisn/ubuntu:rolling-arm64.svg)][microbadger_url]
-[![Layers](https://images.microbadger.com/badges/image/stlouisn/ubuntu:rolling-arm64.svg)][microbadger_url]
-[![Version](https://images.microbadger.com/badges/version/stlouisn/ubuntu:rolling-amd64.svg)][microbadger_url]
-[![Layers](https://images.microbadger.com/badges/image/stlouisn/ubuntu:rolling-amd64.svg)][microbadger_url]
-
 ### Feature Requests
 
 [![Feature Requests][feathub_data]][feathub_url]

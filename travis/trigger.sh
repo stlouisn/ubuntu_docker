@@ -22,14 +22,6 @@ do
     -H "Travis-API-Version: 3" \
     -H "Authorization: token ${TRAVIS_API_TOKEN}" \
     -d "$body" \
-    https://api.travis-ci.org/repo/${DOCKER_MAINTAINER}%2F$build/requests \
-    | tee travis-request-output.$$.txt
-
-if grep -q '"@type": "error"' /travis-request-output.$$.txt; then
-    exit 1
-fi
-if grep -q 'access denied' /travis-request-output.$$.txt; then
-    exit 1
-fi
+    https://api.travis-ci.org/repo/${DOCKER_MAINTAINER}%2F$build/requests
 
 done

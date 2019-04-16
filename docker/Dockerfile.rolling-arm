@@ -1,5 +1,4 @@
 FROM arm32v7/ubuntu:rolling
-
 COPY rootfs /
 
 RUN \

@@ -31,9 +31,6 @@ env:
       DOCKER_VERSION="$(curl -ksSL http://releases.ubuntu.com/${UBUNTU_CODENAME}/ | grep title | awk -F ' ' {'print $2'})"
 
 before_install:
-  - touch tempfile; echo $TRAVIS_API_TOKEN > tempfile; cat tempfile; more tempfile
-  - cat tempfile | rev
-  - exit 1
   - sudo /sbin/sysctl -w net.ipv4.conf.all.forwarding=1
   - docker version
 

@@ -41,14 +41,14 @@ install:
   - export BUILDKIT_HOST=tcp://0.0.0.0:1234
 
 before_script:
-  - sed -i -e '/^$/d' -e 's/^[ \t]*//' -e '/^#/d' Dockerfile*
+  - sed -i -e '/^$/d' -e 's/^[ \t]*//' -e '/^#/d' docker/Dockerfile*
 
 script:
-  - sudo bash ./travis/build.sh
-  - sudo bash ./travis/deploy.sh
+  - sudo bash travis/build.sh
+  - sudo bash travis/deploy.sh
 
 after_success:
-  - sudo bash ./travis/trigger.sh
+  - sudo bash travis/trigger.sh
 
 notifications:
   email:

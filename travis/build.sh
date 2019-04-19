@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -u
 
 # Architectures to build
 architectures="arm arm64 amd64"

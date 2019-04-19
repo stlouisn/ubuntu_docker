@@ -1,20 +1,18 @@
-language: bash
 dist: xenial
 group: travis_latest
-sudo: required
 
 if: |
-  branch = master AND \
-  ! commit_message =~ /readme.md/ AND \
-  ! commit_message =~ /docker-compose.yml/ OR \
-  type = cron
+  branch = master AND ! commit_message =~ /readme.md/ AND ! commit_message =~ /docker-compose.yml/
+  OR type = cron
 
-addons:
-  apt:
-    packages:
-      - docker-ce
+language: bash
+sudo: required
+
+services:
+  - docker
 
 env:
+
   global:
     - BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
     - BUILD_NUMBER="${TRAVIS_BUILD_NUMBER}"
@@ -23,16 +21,18 @@ env:
     - DOCKER_NAME="ubuntu"
     - DOCKER_URL="https://www.ubuntu.com/"
     - SCHEMA_VERSION="1.0"
+    - UBUNTU_CODENAME="$(curl -ksSL https://raw.githubusercontent.com/tianon/docker-brew-ubuntu-core/master/rolling)"
     - VCS_REF="$(git rev-parse --short HEAD)"
     - VCS_URL="$(git remote get-url origin | head -c-5)"
+
   matrix:
     - DOCKER_TAG="rolling"
-      UBUNTU_CODENAME="$(curl -ksSL https://raw.githubusercontent.com/tianon/docker-brew-ubuntu-core/master/rolling)"
       DOCKER_VERSION="$(curl -ksSL http://releases.ubuntu.com/${UBUNTU_CODENAME}/ | grep title | awk -F ' ' {'print $2'})"
 
 before_install:
   - sudo /sbin/sysctl -w net.ipv4.conf.all.forwarding=1
-  - docker version
+  - sudo bash travis/docker.sh
+  - sudo docker version
 
 install:
   - sudo docker run --privileged linuxkit/binfmt:v0.7

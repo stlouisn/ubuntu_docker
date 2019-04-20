@@ -11,7 +11,7 @@ for arch in $architectures; do
 	buildctl build \
 		--frontend dockerfile.v0 \
 		--opt platform=linux/$arch \
-		--opt filename=docker/Dockerfile.${DOCKER_NAME}-${DOCKER_TAG}-$arch \
+		--opt filename=dockerfiles/${DOCKER_NAME}-${DOCKER_TAG}-$arch \
 		--local dockerfile=. \
 		--local context=. \
 		--output type=docker,name=tmp-image-$arch,dest=tmp-image-$arch.tar

@@ -3,38 +3,42 @@
 set -u
 
 # Architectures to build
-architectures="arm arm64 amd64"
+ARCHITECTURES="arm arm64 amd64"
 
-for arch in $architectures; do
+for ARCH in $ARCHITECTURES; do
+
+	# Set dockerfile directory/filename
+	DOCKERFILE="dockerfiles/${DOCKER_NAME}_${DOCKER_TAG}_${ARCH}.dockerfile"
 
 	# Build temporary image
 	buildctl build \
 		--frontend dockerfile.v0 \
-		--opt platform=linux/$arch \
-		--opt filename=dockerfiles/${DOCKER_NAME}-${DOCKER_TAG}-$arch \
+		--progress plain \
+		--opt platform=linux/${ARCH} \
+		--opt filename=${DOCKERFILE} \
 		--local dockerfile=. \
 		--local context=. \
-		--output type=docker,name=tmp-image-$arch,dest=tmp-image-$arch.tar
+		--output type=docker,name=tmp-image-${ARCH},dest=tmp-image-${ARCH}.tar
 
 	# Load temporary image
-	docker load -i tmp-image-$arch.tar
+	docker load -i tmp-image-${ARCH}.tar
 
 	# Run temporary image
-	docker create --name tmp-image-$arch tmp-image-$arch '/bin/bash -c exit'
+	docker create --name tmp-image-${ARCH} tmp-image-${ARCH} '/bin/bash -c exit'
 
 	# Extract flattened image
-	docker export -o import-image-$arch.tar tmp-image-$arch
+	docker export -o import-image-${ARCH}.tar tmp-image-${ARCH}
 
 	# Create docker image
 	docker import \
-		import-image-$arch.tar \
+		import-image-${ARCH}.tar \
 		--message 'Imported from ${DOCKER_NAME}/${DOCKER_TAG}' \
-		${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-$arch
+		${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-${ARCH}
 
 	# Login into docker
 	echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
 
 	# Push image to docker hub
-	docker push ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-$arch
+	docker push ${DOCKER_USERNAME}/${DOCKER_NAME}:${DOCKER_TAG}-${ARCH}
 
 done

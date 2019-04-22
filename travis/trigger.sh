@@ -5,6 +5,7 @@ set -euo pipefail
 # Builds to trigger
 builds="java_docker python_docker mono_docker traefik_docker openvpn_docker"
 
+# Commit Message
 body='{
 "request": {
 "message": "Push from stlouisn/ubuntu",

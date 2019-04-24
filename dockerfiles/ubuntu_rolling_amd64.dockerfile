@@ -12,8 +12,8 @@ RUN \
     # Upgrade all packages
     apt-get upgrade -y && \
 
-    # Install apt-utils	
-    apt-get install -y --no-install-recommends \	
+    # Install apt-utils
+    apt-get install -y --no-install-recommends \
         apt-utils && \
 
     # Install tzdata

@@ -20,14 +20,23 @@ RUN \
     apt-get install -y --no-install-recommends \
         tzdata && \
 
+    # Install password generator
+    apt-get install -y --no-install-recommends \
+        pwgen && \
+
     # Install SSL
     apt-get install -y --no-install-recommends \
+        apt-transport-https \
         ca-certificates \
         openssl && \
 
     # Install curl
     apt-get install -y --no-install-recommends \
         curl && \
+
+    # Install wget
+    apt-get install -y --no-install-recommends \
+        wget && \
 
     # Install gosu
     apt-get install -y --no-install-recommends \

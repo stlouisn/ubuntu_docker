@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # Builds to trigger
-builds="java_docker mono_docker python_docker builder_docker openvpn_docker pi-hole_docker traefik_docker"
+builds="java_docker mono_docker python_docker builder_docker traefik_docker mariadb_docker pi-hole_docker openvpn_docker"
 
 # Commit Message
 body='{

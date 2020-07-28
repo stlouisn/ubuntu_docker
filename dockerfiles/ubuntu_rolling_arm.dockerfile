@@ -1,4 +1,4 @@
-FROM arm32v7/ubuntu:rolling
+FROM arm32v7/ubuntu:bionic
 
 COPY rootfs /
 

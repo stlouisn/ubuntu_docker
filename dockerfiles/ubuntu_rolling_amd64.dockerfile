@@ -1,4 +1,4 @@
-FROM amd64/ubuntu:bionic
+FROM amd64/ubuntu:eoan
 
 COPY rootfs /
 

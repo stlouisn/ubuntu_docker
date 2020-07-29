@@ -1,4 +1,4 @@
-FROM amd64/ubuntu:eoan
+FROM amd64/ubuntu:rolling
 
 COPY rootfs /
 

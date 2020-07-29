@@ -1,4 +1,4 @@
-FROM arm32v7/ubuntu:bionic
+FROM arm32v7/ubuntu:eoan
 
 COPY rootfs /
 

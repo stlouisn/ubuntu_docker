@@ -1,4 +1,4 @@
-FROM arm64v8/ubuntu:eoan
+FROM arm64v8/ubuntu:rolling
 
 COPY rootfs /
 

@@ -21,6 +21,6 @@ for build in $builds; do
     -H "Travis-API-Version: 3" \
     -H "Authorization: token ${TRAVIS_API_TOKEN}" \
     -d "$body" \
-    https://api.travis-ci.org/repo/${DOCKER_MAINTAINER}%2F$build/requests
+    https://api.travis-ci.com/repo/${DOCKER_MAINTAINER}%2F$build/requests
 
 done

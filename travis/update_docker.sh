@@ -25,3 +25,6 @@ apt-get install -y docker-ce
 
 # Restart docker
 service docker restart
+
+# Display docker version
+docker info

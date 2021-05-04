@@ -1,4 +1,5 @@
-FROM amd64/ubuntu:rolling
+#FROM amd64/ubuntu:rolling ## apt-get currently broken
+FROM amd64/ubuntu:latest
 
 COPY rootfs /
 

@@ -1,4 +1,5 @@
-FROM arm64v8/ubuntu:rolling
+#FROM arm64v8/ubuntu:rolling ## apt-get currently broken
+FROM arm64v8/ubuntu:latest
 
 COPY rootfs /
 

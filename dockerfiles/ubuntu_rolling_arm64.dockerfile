@@ -1,4 +1,3 @@
-## apt-get currently broken on rolling
 FROM arm64v8/ubuntu:rolling
 ## FROM arm64v8/ubuntu:latest
 

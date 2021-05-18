@@ -1,4 +1,3 @@
-## apt-get currently broken on rolling
 FROM arm32v7/ubuntu:rolling
 #FROM arm32v7/ubuntu:latest ## 
 

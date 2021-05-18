@@ -1,5 +1,6 @@
-#FROM arm32v7/ubuntu:rolling ## apt-get currently broken
-FROM arm32v7/ubuntu:latest
+## apt-get currently broken on rolling
+FROM arm32v7/ubuntu:rolling
+#FROM arm32v7/ubuntu:latest ## 
 
 COPY rootfs /
 

@@ -32,7 +32,7 @@ jobs:
           name: Build images
           command: |
             export DOCKER_CLI_EXPERIMENTAL=enabled
-            docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 --push -t arm-image .
+            docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 --push -t arm-image ./dockerfiles/.
 
 workflows:
   version: 2

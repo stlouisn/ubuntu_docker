@@ -1,38 +1,41 @@
 version: 2.1
 
 jobs:
-  build:
-    machine:
-      image: 'ubuntu-2004:202010-01'
-    steps:
-      - checkout
-      - run:
-          name: Setup buildx and qemu
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y qemu-user-static
-            sudo apt-get install -y binfmt-support
-      - run:
-          name: Check versions
-          command: |
-            qemu-aarch64-static --version
-            update-binfmts --version 
-      - run:
-          name: Create builder
-          command: |
-            export DOCKER_CLI_EXPERIMENTAL=enabled
-            docker buildx create --name arm-builder
-            docker buildx use arm-builder
-            docker buildx inspect --bootstrap
-
-      - run:
-          name: Build ARM docker
-          command: |
-            export DOCKER_CLI_EXPERIMENTAL=enabled
-            docker buildx build --platform linux/arm64,linux/amd64,linux/386,linux/riscv64 --push -t arm-image .
+	build:
+		machine:
+			image: 'ubuntu-2004:202010-01'
+		environment:
+			TEST: 'test'
+		steps:
+			- checkout
+			- run:
+				name: Setup dependencies
+				command: |
+					sudo apt-get update
+					sudo apt-get install -y qemu-user-static
+					sudo apt-get install -y binfmt-support
+			- run:
+				name: Check versions
+				command: |
+					qemu-aarch64-static --version
+					update-binfmts --version
+					docker --version
+#			- setup_remote_docker
+			- run:
+				name: Create builder
+				command: |
+					export DOCKER_CLI_EXPERIMENTAL=enabled
+					docker buildx create --name arm-builder
+					docker buildx use arm-builder
+					docker buildx inspect --bootstrap
+			- run:
+				name: Build images
+				command: |
+					export DOCKER_CLI_EXPERIMENTAL=enabled
+					docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 --push -t arm-image .
 
 workflows:
-  version: 2
-  build:
-    jobs:
-      - build
+	version: 2
+	build:
+		jobs:
+			- build

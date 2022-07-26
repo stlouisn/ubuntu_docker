@@ -1,5 +1,4 @@
-FROM arm32v7/ubuntu:rolling
-#FROM arm32v7/ubuntu:latest ## 
+FROM amd64/ubuntu:latest
 
 COPY rootfs /
 
@@ -13,8 +12,8 @@ RUN \
     # Upgrade all packages
     apt-get upgrade -y && \
     #
-    # Install apt-utils	
-    apt-get install -y --no-install-recommends \	
+    # Install apt-utils
+    apt-get install -y --no-install-recommends \
         apt-utils && \
     #
     # Install tzdata
@@ -68,5 +67,5 @@ RUN \
         /root/.wget-hsts \
         /tmp/* \
         /var/lib/apt/lists/*
-
+        
 CMD ["/bin/bash", "-l"]

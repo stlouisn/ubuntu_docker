@@ -1,4 +1,4 @@
-FROM arm32v7/ubuntu:latest
+FROM ubuntu:latest
 
 COPY rootfs /
 

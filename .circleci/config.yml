@@ -3,7 +3,6 @@ version: 2.1
 commands:
 
   configure-dockerhub:
-    description: Configure Docker Hub access
     steps:
       - run:
           name: Configure Docker Hub
@@ -13,7 +12,6 @@ commands:
             docker login --username=$DOCKER_LOGIN --password=$DOCKER_PASSWORD
 
   install-docker-buildx:
-    description: Install Docker Buildx
     steps:
       - run:
           name: Install Docker Buildx

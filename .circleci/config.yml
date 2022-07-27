@@ -52,13 +52,6 @@ workflows:
     jobs:
       - build-multiarch-container:
           name: build-python-base-arm64
-          context:
-            - dockerhub
-            - models
-          filters:
-            branches:
-              only:
-                - main
 
 # orbs:
 #   docker-buildx: foodles/docker-buildx@0.0.3

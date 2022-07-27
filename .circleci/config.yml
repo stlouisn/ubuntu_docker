@@ -1,12 +1,27 @@
 version: 2.1
 
-orbs:
-  docker-buildx: foodles/docker-buildx@0.0.3
+# orbs:
+#   docker-buildx: foodles/docker-buildx@0.0.3
 
-workflows:
-    build-deploy:
-      jobs:
-        - docker-buildx/publish:
-            dockerfile: dockerfile
-            image: stlouisn/ubuntu
-            tag: latest
+# workflows:
+#     build-deploy:
+#       jobs:
+#         - docker-buildx/publish:
+#             dockerfile: dockerfile
+#             image: stlouisn/ubuntu
+#             tag: latest
+
+jobs:
+  docker-image:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run: docker version
+      - setup_remote_docker:
+          version: "20.10.11"  # <-- modern Docker version!!
+          docker_layer_caching: true
+      - run: |
+          export DOCKER_BUILDKIT=1
+          docker version
+          docker build .

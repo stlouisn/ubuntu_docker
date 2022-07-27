@@ -1,17 +1,12 @@
 version: 2.1
 
-workflows:
-  build-deploy:
-    jobs:
-      - build
+orbs:
+  docker-buildx: foodles/docker-buildx@0.0.3
 
-jobs:
-  build:
-    docker:
-      - image: stlouisn/ubuntu:latest
-  steps:
-    - setup_remote_docker:
-        version: 20.10.11
-    - run: docker version
-    - checkout
-    - run: docker buildx build . 
+workflows:
+    build-deploy:
+      jobs:
+        - docker-buildx/publish:
+            dockerfile: dockerfile
+            image: stlouisn/ubuntu
+            tag: latest

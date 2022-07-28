@@ -39,7 +39,7 @@ jobs:
             echo "$DOCKER_PASSWORD" | docker login --username=$DOCKER_LOGIN --password-stdin
       - run:
           name: Build and push container
-          no_output_timeout: 2h
+          no_output_timeout: 20m
           command: |
             docker buildx inspect --bootstrap
             echo

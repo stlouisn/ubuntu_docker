@@ -21,11 +21,13 @@
 [![Docker Pulls][docker_pulls_logo]][docker_pulls_url]
 [![License][license_logo]][license_url]
 
+[![arm](http://img.shields.io/docker/v/stlouisn/ubuntu/latest?arch=arm64)]
+
 Ubuntu Docker is a minimal base image that is configured for use within Docker containers and offers:
 
 - Modifications for Docker-friendliness.
 - Administration tools that are especially useful in the context of Docker.
-- Mechanisms for easily running processes as non-root.
+- Mechanism for easily running processes as non-root.
 
 ```docker
 docker pull stlouisn/ubuntu:latest /bin/bash -l

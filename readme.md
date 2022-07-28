@@ -21,7 +21,8 @@
 [![Docker Pulls][docker_pulls_logo]][docker_pulls_url]
 [![License][license_logo]][license_url]
 
-[![arm](http://img.shields.io/docker/v/stlouisn/ubuntu/latest?arch=arm64)]
+[![Arm Version](http://img.shields.io/docker/v/stlouisn/ubuntu/latest?arch=arm)](google.ca)
+[![Arm Size](http://img.shields.io/docker/image-size/stlouisn/ubuntu/latest?arch=arm)](google.ca)
 
 Ubuntu Docker is a minimal base image that is configured for use within Docker containers and offers:
 

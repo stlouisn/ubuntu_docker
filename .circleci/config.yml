@@ -19,7 +19,7 @@ jobs:
       # - setup_remote_docker:
       #     version: 20.10.11
       - run:
-          name: Adding Docker labels
+          name: Labelling dockerfile
           command: |
             export C_VERSION="$(bash .circleci/get_version.sh)"
             bash .circleci/docker_labels.sh

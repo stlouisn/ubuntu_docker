@@ -32,33 +32,34 @@ jobs:
             echo maintainer = $C_MAINTAINER
             echo image_name = $C_NAME:$C_TAG
             echo image_version = $C_VERSION
-      - run:
-          name: Configure Docker Buildx
-          command: |
-            docker buildx version
-            echo
-            sudo apt-get update -qq && sudo apt-get install -y binfmt-support qemu-user-static
-            echo
-            docker pull multiarch/qemu-user-static
-            echo
-            docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-            echo
-            docker context create buildcontext
-            echo
-            docker buildx create buildcontext --use --platform $BUILD_PLATFORMS
-      - run:
-          name: Configure Docker Hub
-          command: |
-            [ -z "$DOCKER_LOGIN" ] && exit 0
-            [ -z "$DOCKER_PASSWORD" ] && exit 0
-            echo "$DOCKER_PASSWORD" | docker login --username=$DOCKER_LOGIN --password-stdin
-      - run:
-          name: Build and push container
-          no_output_timeout: 20m
-          command: |
-            docker buildx inspect --bootstrap
-            echo
-            docker buildx build --tag $C_MAINTAINER/$C_NAME:$C_TAG --platform $BUILD_PLATFORMS --progress plain --push .
+            pwd
+      # - run:
+      #     name: Configure Docker Buildx
+      #     command: |
+      #       docker buildx version
+      #       echo
+      #       sudo apt-get update -qq && sudo apt-get install -y binfmt-support qemu-user-static
+      #       echo
+      #       docker pull multiarch/qemu-user-static
+      #       echo
+      #       docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+      #       echo
+      #       docker context create buildcontext
+      #       echo
+      #       docker buildx create buildcontext --use --platform $BUILD_PLATFORMS
+      # - run:
+      #     name: Configure Docker Hub
+      #     command: |
+      #       [ -z "$DOCKER_LOGIN" ] && exit 0
+      #       [ -z "$DOCKER_PASSWORD" ] && exit 0
+      #       echo "$DOCKER_PASSWORD" | docker login --username=$DOCKER_LOGIN --password-stdin
+      # - run:
+      #     name: Build and push container
+      #     no_output_timeout: 20m
+      #     command: |
+      #       docker buildx inspect --bootstrap
+      #       echo
+      #       docker buildx build --tag $C_MAINTAINER/$C_NAME:$C_TAG --platform $BUILD_PLATFORMS --progress plain --push .
 
 workflows:
   version: 2

@@ -10,7 +10,7 @@
 [circleci_logo]: https://circleci.com/gh/stlouisn/ubuntu_docker.svg?style=svg
 [circleci_url]: https://app.circleci.com/pipelines/github/stlouisn/ubuntu_docker
 
-[license_logo]: https://img.shields.io/license/tianon/docker-brew-ubuntu-core
+[license_logo]: https://img.shields.io/github/license/tianon/docker-brew-ubuntu-core
 [license_url]: https://github.com/tianon/docker-brew-ubuntu-core/blob/master/LICENSE
 
 [issues_logo]: https://img.shields.io/badge/-issues-no.svg?colorA=a7a7a7&colorB=e01563&logo=github&logoWidth=14

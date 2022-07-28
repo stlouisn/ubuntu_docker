@@ -22,7 +22,6 @@
 ## Ubuntu Docker
 
 [![Build Status][circleci_logo]][circleci_url]
-[![Docker Stars][docker_stars_logo]][docker_stars_url]
 [![Docker Version][docker_version_logo]][docker_version_url]
 [![Docker Size][docker_size_logo]][docker_size_url]
 [![Docker Pulls][docker_pulls_logo]][docker_pulls_url]

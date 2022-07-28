@@ -9,10 +9,11 @@ jobs:
       C_NAME: "ubuntu"                             # <-- variable
       C_TAG: "latest"                              # <-- variable
       BUILD_PLATFORMS: "linux/arm64,linux/arm/v7"
+      DOCKER_LOGIN: "stlouisn"
     docker:
       - image: cimg/base:stable
         auth:
-          username: $C_MAINTAINER
+          username: $DOCKER_LOGIN
           password: $DOCKER_PASSWORD
     steps:
       - checkout

@@ -32,6 +32,8 @@ commands:
 jobs:
 
   build-multiarch-container:
+    environment:
+      BUILD_PLATFORMS: "linux/amd64,linux/arm64,linux/arm"
     docker:
       - image: cimg/base:stable
     steps:
@@ -55,5 +57,3 @@ workflows:
     jobs:
       - build-multiarch-container:
           name: build-docker-ubuntu
-    environment:
-      BUILD_PLATFORMS: "linux/amd64,linux/arm64,linux/arm"

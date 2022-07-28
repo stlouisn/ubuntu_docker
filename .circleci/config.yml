@@ -1,6 +1,5 @@
 version: 2.1
 
-#var build_platforms=linux/amd64,linux/arm64,linux/arm
 #var docker_tag=stlouisn/ubuntu
 
 commands:
@@ -38,8 +37,8 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 19.03.13
-          #version: "20.10.11"  # <-- modern Docker version!!
+          #version: 19.03.13
+          version: 20.10.16
           docker_layer_caching: true
       - install-docker-buildx
       - configure-docker-hub
@@ -56,3 +55,5 @@ workflows:
     jobs:
       - build-multiarch-container:
           name: build-docker-ubuntu
+    environment:
+      BUILD_PLATFORMS: "linux/amd64,linux/arm64,linux/arm"

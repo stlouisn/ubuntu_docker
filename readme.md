@@ -21,7 +21,7 @@
 [![Build Status][circleci_logo]][circleci_url]
 [![Docker Version][docker_version_logo]][docker_version_url]
 [![Docker Pulls][docker_pulls_logo]][docker_pulls_url]
-[![License: GPL v3][license_logo]][license_url]
+[![License][license_logo]][license_url]
 
 Ubuntu base image.
 

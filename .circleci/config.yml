@@ -9,9 +9,10 @@ jobs:
           username: $DOCKER_LOGIN
           password: $DOCKER_PASSWORD
     environment:
-      IMAGE_TAG: "stlouisn/ubuntu"
-      # BUILD_PLATFORMS: "linux/arm64"
       BUILD_PLATFORMS: "linux/arm64,linux/arm/v7"
+      C_MAINTAINER: "stlouisn"
+      C_NAME: "ubuntu"
+      C_TAG: "latest"
     steps:
       - checkout
       - setup_remote_docker:
@@ -42,11 +43,11 @@ jobs:
           command: |
             docker buildx inspect --bootstrap
             echo
-            docker buildx build --progress plain --push -t $IMAGE_TAG --platform $BUILD_PLATFORMS .
+            docker buildx build --tag $C_MAINTAINER/$C_NAME:$C_TAG --platform $BUILD_PLATFORMS --progress plain --push .
 
 workflows:
   version: 2
-  build:
+  build-container:
     jobs:
       - build-multiarch-container:
           name: build-docker-ubuntu

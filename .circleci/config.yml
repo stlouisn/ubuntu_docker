@@ -1,31 +1,5 @@
 version: 2.1
 
-commands:
-
-  install-docker-buildx:
-    steps:
-      - run:
-          name: Install Docker Buildx
-          command: |
-            mkdir -vp ~/.docker/cli-plugins/
-            curl --silent -L "https://github.com/docker/buildx/releases/download/v0.5.1/buildx-v0.5.1.linux-amd64" > ~/.docker/cli-plugins/docker-buildx
-            chmod a+x ~/.docker/cli-plugins/docker-buildx
-            docker buildx version
-            sudo apt-get update && sudo apt-get install -y binfmt-support qemu-user-static
-            docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-            echo docker run --privileged --rm tonistiigi/binfmt --install arm64,arm
-            docker context create buildcontext
-            docker buildx create buildcontext --use
-
-  configure-docker-hub:
-    steps:
-      - run:
-          name: Configure Docker Hub
-          command: |
-            [ -z "$DOCKER_LOGIN" ] && exit 0
-            [ -z "$DOCKER_PASSWORD" ] && exit 0
-            echo "$DOCKER_PASSWORD" | docker login --username=$DOCKER_LOGIN --password-stdin
-
 jobs:
 
   build-multiarch-container:
@@ -43,8 +17,24 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 20.10.11
-      - install-docker-buildx
-      #- configure-docker-hub
+      - run:
+          name: Install Docker Buildx
+          command: |
+            mkdir -vp ~/.docker/cli-plugins/
+            curl --silent -L "https://github.com/docker/buildx/releases/download/v0.5.1/buildx-v0.5.1.linux-amd64" > ~/.docker/cli-plugins/docker-buildx
+            chmod a+x ~/.docker/cli-plugins/docker-buildx
+            docker buildx version
+            sudo apt-get update && sudo apt-get install -y binfmt-support qemu-user-static
+            docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+            echo docker run --privileged --rm tonistiigi/binfmt --install arm64,arm
+            docker context create buildcontext
+            docker buildx create buildcontext --use
+      - run:
+          name: Configure Docker Hub
+          command: |
+            [ -z "$DOCKER_LOGIN" ] && exit 0
+            [ -z "$DOCKER_PASSWORD" ] && exit 0
+            echo "$DOCKER_PASSWORD" | docker login --username=$DOCKER_LOGIN --password-stdin
       - run:
           name: Build and push container
           no_output_timeout: 2h

@@ -1,4 +1,4 @@
-[circleci_logo]: https://circleci.com/gh/stlouisn/ubuntu_docker.svg?style=svg
+[circleci_logo]: https://circleci.com/gh/stlouisn/ubuntu_docker.svg?style=shield
 [circleci_url]: https://app.circleci.com/pipelines/github/stlouisn/ubuntu_docker
 
 [docker_stars_logo]: https://img.shields.io/docker/stars/stlouisn/ubuntu

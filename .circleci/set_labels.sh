@@ -33,7 +33,7 @@ cat dockerfile
 
 # Append labels to dockerfile
 cat <<- EOF >> dockerfile
-\n
+
 LABEL \
 	org.label-schema.build-date="$BUILD_DATE" \
 	org.label-schema.description="$C_DESCRIPTION" \

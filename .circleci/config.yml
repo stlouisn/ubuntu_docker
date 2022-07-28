@@ -4,12 +4,11 @@ jobs:
   build-multiarch-container:
     resource_class: small
     environment:
-      C_DESCRIPTION: "ubuntu base image"
-      C_MAINTAINER: "stlouisn"
-      C_NAME: "ubuntu"
-      C_TAG: "latest"
-      C_URL: "https://www.ubuntu.com/"
-      BUILD_PLATFORMS: "linux/arm64,linux/arm/v7"
+      C_DESCRIPTION: "ubuntu base image"           # <-- change
+      C_MAINTAINER: "stlouisn"                     # <-- change
+      C_NAME: "ubuntu"                             # <-- change
+      C_TAG: "latest"                              # <-- change
+      BUILD_PLATFORMS: "linux/arm64,linux/arm/v7"  # <-- change
     docker:
       - image: cimg/base:stable
         auth:
@@ -22,7 +21,7 @@ jobs:
       - run:
           name: Configure Docker labels
           command: |
-            bash .circleci/get_version.sh
+            export C_VERSION="$(bash .circleci/get_version.sh)"
             bash .circleci/docker_labels.sh
       # - run:
       #     name: Configure Docker Buildx

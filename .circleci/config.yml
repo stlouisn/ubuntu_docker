@@ -12,23 +12,24 @@ jobs:
           password: $DOCKER_PASSWORD
     environment:
       TAG: "stlouisn/ubuntu"
-      BUILD_PLATFORMS: "linux/arm64"
-      # BUILD_PLATFORMS: "linux/arm64,linux/arm/v7"
+      # BUILD_PLATFORMS: "linux/arm64"
+      BUILD_PLATFORMS: "linux/arm64,linux/arm/v7"
     steps:
       - checkout
       - setup_remote_docker:
           version: 20.10.11
       - run:
-          name: Install Docker Buildx
+          name: Configure Docker Buildx
           command: |
-            #mkdir -vp ~/.docker/cli-plugins/
-            #curl --silent -L "https://github.com/docker/buildx/releases/download/v0.5.1/buildx-v0.5.1.linux-amd64" > ~/.docker/cli-plugins/docker-buildx
-            #chmod a+x ~/.docker/cli-plugins/docker-buildx
             docker buildx version
+            echo
             sudo apt-get update && sudo apt-get install -y binfmt-support qemu-user-static
+            echo
             docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+            echo
             docker context create buildcontext
-            docker buildx create buildcontext --use
+            echo
+            docker buildx create buildcontext --use #--platform $BUILD_PLATFORMS
       - run:
           name: Configure Docker Hub
           command: |
@@ -40,11 +41,12 @@ jobs:
           no_output_timeout: 2h
           command: |
             docker buildx inspect --bootstrap
+            echo
             docker buildx build --progress plain --push -t $TAG --platform $BUILD_PLATFORMS .
 
 workflows:
   version: 2
-  build-images:
+  build-container:
     jobs:
       - build-multiarch-container:
           name: build-docker-ubuntu

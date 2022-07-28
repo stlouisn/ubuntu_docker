@@ -29,6 +29,10 @@
 
 Ubuntu base image.
 
+```docker
+docker pull stlouisn/ubuntu
+```
+
 ### Support
 
 [![GitHub Issues][issues_logo]][issues_url]

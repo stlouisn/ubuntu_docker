@@ -4,7 +4,7 @@
 [docker_stars_logo]: https://img.shields.io/docker/stars/stlouisn/ubuntu
 [docker_stars_url]: https://hub.docker.com/r/stlouisn/ubuntu
 
-[docker_pulls_logo]: https://img.shields.io/docker/pulls/stlouisn/ubuntu.svg
+[docker_pulls_logo]: https://img.shields.io/docker/pulls/stlouisn/ubuntu
 [docker_pulls_url]: https://hub.docker.com/r/stlouisn/ubuntu
 
 [docker_version_logo]: http://img.shields.io/docker/v/stlouisn/ubuntu/latest?arch=arm64
@@ -18,18 +18,6 @@
 
 [issues_logo]: https://img.shields.io/badge/-issues-no.svg?colorA=a7a7a7&colorB=e01563&logo=github&logoWidth=34
 [issues_url]: https://github.com/stlouisn/ubuntu_docker/issues
-
-<p id="copy">This is the copy string!</p>
-<button type="button" onclick="copyEvent('copy')">Copy</button>
-
-<script>
-    function copyEvent(id)
-    {
-        var str = document.getElementById(id);
-        window.getSelection().selectAllChildren(str);
-        document.execCommand("Copy")
-    }
-</script>
 
 ## Ubuntu Docker
 

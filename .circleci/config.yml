@@ -19,10 +19,15 @@ jobs:
       # - setup_remote_docker:
       #     version: 20.10.11
       - run:
-          name: Configure Docker labels
+          name: Adding Docker labels
           command: |
             export C_VERSION="$(bash .circleci/get_version.sh)"
             bash .circleci/docker_labels.sh
+      - run:
+          name: Preparing dockerfile
+          command: |
+            sed -i -e '/^$/d' -e 's/^[ \t]*//' -e '/^#/d' dockerfile
+            cat dockerfile
       # - run:
       #     name: Configure Docker Buildx
       #     command: |

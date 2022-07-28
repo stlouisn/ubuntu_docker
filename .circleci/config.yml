@@ -4,10 +4,10 @@ jobs:
   build-multiarch-container:
     resource_class: small
     environment:
-      C_DESCRIPTION: "ubuntu base image"           # <-- static variable
-      C_MAINTAINER: "stlouisn"                     # <-- static variable
-      C_NAME: "ubuntu"                             # <-- static variable
-      C_TAG: "latest"                              # <-- static variable
+      C_DESCRIPTION: "ubuntu base image"           # <-- variable
+      C_MAINTAINER: "stlouisn"                     # <-- variable
+      C_NAME: "ubuntu"                             # <-- variable
+      C_TAG: "latest"                              # <-- variable
       BUILD_PLATFORMS: "linux/arm64,linux/arm/v7"
     docker:
       - image: cimg/base:stable
@@ -22,7 +22,7 @@ jobs:
           name: Labelling dockerfile
           command: |
             export C_VERSION="$(bash .circleci/get_version.sh)"
-            bash .circleci/add_labels.sh
+            bash .circleci/docker_labels.sh
       - run:
           name: Preparing dockerfile
           command: |
@@ -61,4 +61,4 @@ workflows:
   build-container:
     jobs:
       - build-multiarch-container:
-          name: build-docker-ubuntu                # <-- static name
+          name: build-docker-ubuntu                # <-- variable

@@ -2,7 +2,4 @@
 
 set -euo pipefail
 
-for FILE in $(find rootfs/. -name '*.sh'); do
-    echo $FILE
-    chmod +x $FILE
-done
+[ -f rootfs/usr/local/bin/docker_entrypoint.sh] && chmod +x rootfs/usr/local/bin/docker_entrypoint.sh

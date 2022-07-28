@@ -40,10 +40,19 @@ RUN \
         nano \
         tree && \
     #
-    # # Customize root profile
+    # Customize root profile
     sed -i "s@alias ll='ls@#alias ll='ls@" /root/.bashrc && \
     sed -i "s@alias la='ls@#alias la='ls@" /root/.bashrc && \
     sed -i "s@alias l='ls@#alias l='ls@" /root/.bashrc && \
+    #
+    # Remove unnecessary directories
+    rm -rf \
+        /opt \
+        /usr/games \
+        /usr/local/games \
+        /srv \
+        /var/log/* \
+        /var/opt && \
     #
     # Clean apt-cache
     apt-get autoremove -y --purge && \

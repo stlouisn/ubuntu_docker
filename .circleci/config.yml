@@ -6,7 +6,7 @@ jobs:
     docker:
       - image: cimg/base:stable
         auth:
-          username: $DOCKER_LOGIN
+          username: stlouisn
           password: $DOCKER_PASSWORD
     environment:
       BUILD_PLATFORMS: "linux/arm64,linux/arm/v7"

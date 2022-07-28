@@ -27,4 +27,6 @@ org.label-schema.version="$C_VERSION" \\
 org.label-schema.schema-version="$SCHEMA_VERSION"
 EOF
 
+sed -i -e '/^$/d' -e 's/^[ \t]*//' -e '/^#/d' dockerfile
+
 cat dockerfile

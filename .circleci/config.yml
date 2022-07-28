@@ -26,20 +26,25 @@ commands:
           command: |
             [ -z "$DOCKER_LOGIN" ] && exit 0
             [ -z "$DOCKER_PASSWORD" ] && exit 0
-            docker version
             docker login --username=$DOCKER_LOGIN --password=$DOCKER_PASSWORD
 
 jobs:
 
   build-multiarch-container:
-    environment:
-      BUILD_PLATFORMS: "linux/amd64,linux/arm64,linux/arm"
+    resource_class: large
     docker:
       - image: cimg/base:stable
+        auth:
+          username: $DOCKER_LOGIN
+          password: $DOCKER_PASSWORD
+    environment:
+      DOCKER_TAG: "stlouisn/ubuntu"
+      BUILD_PLATFORMS: "linux/arm64"
+      #BUILD_PLATFORMS: "linux/arm64,linux/arm"
+      #BUILD_PLATFORMS: "linux/amd64,linux/arm64,linux/arm"
     steps:
       - checkout
       - setup_remote_docker:
-          #version: 19.03.13
           version: 20.10.11
           docker_layer_caching: true
       - install-docker-buildx
@@ -49,7 +54,7 @@ jobs:
           no_output_timeout: 2h
           command: |
             docker buildx inspect --bootstrap
-            docker buildx build --progress plain --push -t stlouisn/ubuntu --platform linux/amd64,linux/arm64,linux/arm .
+            docker buildx build --progress plain --push -t $DOCKER_TAG --platform $BUILD_PLATFORMS .
 
 workflows:
   version: 2

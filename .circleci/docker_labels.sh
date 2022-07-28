@@ -14,6 +14,7 @@ echo maintainer = $C_MAINTAINER
 echo image_name = $C_NAME:$C_TAG
 echo description = $C_DESCRIPTION
 echo image_version = $C_VERSION
+echo
 
 # Append labels to dockerfile
 cat <<- EOF >> dockerfile
@@ -26,7 +27,3 @@ org.label-schema.name="$C_NAME" \\
 org.label-schema.version="$C_VERSION" \\
 org.label-schema.schema-version="$SCHEMA_VERSION"
 EOF
-
-sed -i -e '/^$/d' -e 's/^[ \t]*//' -e '/^#/d' dockerfile
-
-cat dockerfile

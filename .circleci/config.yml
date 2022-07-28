@@ -1,18 +1,19 @@
 version: 2.1
 
 jobs:
-
   build-multiarch-container:
     resource_class: medium
+    # resource_class: small
+    # resource_class: large
     docker:
       - image: cimg/base:stable
         auth:
           username: $DOCKER_LOGIN
           password: $DOCKER_PASSWORD
     environment:
-      DOCKER_TAG: "stlouisn/ubuntu"
+      TAG: "stlouisn/ubuntu"
       BUILD_PLATFORMS: "linux/arm64"
-      #BUILD_PLATFORMS: "linux/arm64,linux/arm"
+      # BUILD_PLATFORMS: "linux/arm64,linux/arm/v7"
     steps:
       - checkout
       - setup_remote_docker:
@@ -20,13 +21,12 @@ jobs:
       - run:
           name: Install Docker Buildx
           command: |
-            mkdir -vp ~/.docker/cli-plugins/
-            curl --silent -L "https://github.com/docker/buildx/releases/download/v0.5.1/buildx-v0.5.1.linux-amd64" > ~/.docker/cli-plugins/docker-buildx
-            chmod a+x ~/.docker/cli-plugins/docker-buildx
+            #mkdir -vp ~/.docker/cli-plugins/
+            #curl --silent -L "https://github.com/docker/buildx/releases/download/v0.5.1/buildx-v0.5.1.linux-amd64" > ~/.docker/cli-plugins/docker-buildx
+            #chmod a+x ~/.docker/cli-plugins/docker-buildx
             docker buildx version
             sudo apt-get update && sudo apt-get install -y binfmt-support qemu-user-static
             docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-            echo docker run --privileged --rm tonistiigi/binfmt --install arm64,arm
             docker context create buildcontext
             docker buildx create buildcontext --use
       - run:
@@ -40,7 +40,7 @@ jobs:
           no_output_timeout: 2h
           command: |
             docker buildx inspect --bootstrap
-            docker buildx build --progress plain --push -t $DOCKER_TAG --platform $BUILD_PLATFORMS .
+            docker buildx build --progress plain --push -t $TAG --platform $BUILD_PLATFORMS .
 
 workflows:
   version: 2

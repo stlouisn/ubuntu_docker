@@ -41,9 +41,9 @@ RUN \
         tree && \
     #
     # # Customize root profile
-    # sed -i "s@alias ll='ls@#alias ll='ls@" /root/.bashrc && \
-    # sed -i "s@alias la='ls@#alias la='ls@" /root/.bashrc && \
-    # sed -i "s@alias l='ls@#alias l='ls@" /root/.bashrc && \
+    sed -i "s@alias ll='ls@#alias ll='ls@" /root/.bashrc && \
+    sed -i "s@alias la='ls@#alias la='ls@" /root/.bashrc && \
+    sed -i "s@alias l='ls@#alias l='ls@" /root/.bashrc && \
     #
     # Clean apt-cache
     apt-get autoremove -y --purge && \

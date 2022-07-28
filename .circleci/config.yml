@@ -19,6 +19,16 @@ jobs:
       - setup_remote_docker:
           version: 20.10.11
       - run:
+          name: Configure Docker Labels
+          command: |
+            echo Build Labels
+            echo   build date     = $BUILD_DATE
+            echo   build platform = $BUILD_PLATFORM
+            echo
+            echo Container Labels
+            echo   maintainer = $C_MAINTAINER
+            echo   image_name = $C_NAME:$C_TAG
+      - run:
           name: Configure Docker Buildx
           command: |
             docker buildx version

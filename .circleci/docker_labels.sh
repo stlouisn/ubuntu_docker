@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # Build variables
-BUILD_DATE="$(date -u +%Y-%m-%d %H:%M:%SZ)"
+BUILD_DATE="$(date -u +%Y-%m-%d\ %H:%M:%SZ)"
 
 # Schema version
 SCHEMA_VERSION="1.0"

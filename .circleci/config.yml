@@ -22,7 +22,7 @@ jobs:
           name: Labelling dockerfile
           command: |
             export C_VERSION="$(bash .circleci/get_version.sh)"
-            bash .circleci/docker_labels.sh
+            bash .circleci/add_labels.sh
       - run:
           name: Preparing dockerfile
           command: |

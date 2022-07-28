@@ -8,7 +8,7 @@
 [circleci_url]: https://app.circleci.com/pipelines/github/stlouisn/ubuntu_docker
 [license_logo]: https://img.shields.io/badge/License-GPLv3-blue.svg
 [license_url]: https://www.gnu.org/licenses/gpl-3.0
-[issues_logo]: https://img.shields.io/badge/-issues-no.svg?colorA=a7a7a7&colorB=e01563&logo=github&logoWidth=14
+[issues_logo]: https://img.shields.io/license/tianon/docker-brew-ubuntu-core
 [issues_url]: https://github.com/license/tianon/docker-brew-ubuntu-core
 
 ## Ubuntu Docker

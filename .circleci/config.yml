@@ -18,13 +18,13 @@ jobs:
       L_SCHEMA_VERSION: "1.0"
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.11
+      # - setup_remote_docker:
+      #     version: 20.10.11
       - run:
           name: Configure Docker labels
           command: |
             export BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            bash ./.scripts/get_version.sh
+            export C_VERSION="$(bash ./.scripts/get_version.sh)"
             echo
             echo Labels
             echo ------------------------------------

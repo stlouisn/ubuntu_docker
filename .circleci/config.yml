@@ -15,7 +15,7 @@ jobs:
       C_NAME: "ubuntu"
       C_TAG: "latest"
       C_URL: "https://www.ubuntu.com/"
-      L_SCHEMA_VERSION: "1.0"
+      SCHEMA_VERSION: "1.0"
     steps:
       - checkout
       # - setup_remote_docker:
@@ -24,15 +24,14 @@ jobs:
           name: Configure Docker labels
           command: |
             export BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            export C_VERSION="$(bash ./.scripts/get_version.sh)"
-            echo
+            export C_VERSION="$(bash .circleci/get_version.sh)"
             echo Labels
             echo ------------------------------------
             echo build_date = $BUILD_DATE
             echo maintainer = $C_MAINTAINER
             echo image_name = $C_NAME:$C_TAG
+            echo description = $C_DESCRIPTION
             echo image_version = $C_VERSION
-            pwd
       # - run:
       #     name: Configure Docker Buildx
       #     command: |

@@ -10,8 +10,8 @@
 [docker_pulls_logo]: https://img.shields.io/docker/pulls/stlouisn/ubuntu
 [docker_pulls_url]: https://hub.docker.com/r/stlouisn/ubuntu
 
-[license_logo]: https://img.shields.io/github/license/tianon/docker-brew-ubuntu-core
-[license_url]: https://github.com/tianon/docker-brew-ubuntu-core/blob/master/LICENSE
+[license_logo]: https://img.shields.io/github/license/stlouisn/ubuntu_docker
+[license_url]: https://github.com/stlouisn/ubuntu_docker/blob/main/LICENSE
 
 ### Ubuntu Docker
 

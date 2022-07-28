@@ -1,4 +1,4 @@
-[circleci_logo]: https://circleci.com/gh/stlouisn/ubuntu_docker.svg?style=shield
+[circleci_logo]: https://circleci.com/gh/stlouisn/ubuntu_docker.svg?style=svg
 [circleci_url]: https://app.circleci.com/pipelines/github/stlouisn/ubuntu_docker
 
 [docker_stars_logo]: https://img.shields.io/docker/stars/stlouisn/ubuntu
@@ -18,6 +18,18 @@
 
 [issues_logo]: https://img.shields.io/badge/-issues-no.svg?colorA=a7a7a7&colorB=e01563&logo=github&logoWidth=34
 [issues_url]: https://github.com/stlouisn/ubuntu_docker/issues
+
+<p id="copy">This is the copy string!</p>
+<button type="button" onclick="copyEvent('copy')">Copy</button>
+
+<script>
+    function copyEvent(id)
+    {
+        var str = document.getElementById(id);
+        window.getSelection().selectAllChildren(str);
+        document.execCommand("Copy")
+    }
+</script>
 
 ## Ubuntu Docker
 

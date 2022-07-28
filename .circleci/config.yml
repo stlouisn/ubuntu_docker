@@ -46,8 +46,8 @@ jobs:
       - run:
           name: Configure Docker Hub
           command: |
-            [ -z "$DOCKER_LOGIN" ] && exit 0
-            [ -z "$DOCKER_PASSWORD" ] && exit 0
+            [ -z "$DOCKER_LOGIN" ] && exit 1
+            [ -z "$DOCKER_PASSWORD" ] && exit 1
             echo "$DOCKER_PASSWORD" | docker login --username=$DOCKER_LOGIN --password-stdin
       - run:
           name: Build and push container

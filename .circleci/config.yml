@@ -21,10 +21,10 @@ jobs:
       - setup_remote_docker:
           version: 20.10.11
       - run:
-          name: Configure Docker Labels
+          name: Configure Docker labels
           command: |
             export BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            bash .scripts/get_version.sh
+            bash ./.scripts/get_version.sh
             echo
             echo Labels
             echo ------------------------------------

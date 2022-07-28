@@ -1,7 +1,5 @@
 version: 2.1
 
-#var docker_tag=stlouisn/ubuntu
-
 commands:
 
   install-docker-buildx:
@@ -15,7 +13,7 @@ commands:
             docker buildx version
             sudo apt-get update && sudo apt-get install -y binfmt-support qemu-user-static
             docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-            docker run --privileged --rm tonistiigi/binfmt --install arm64,arm
+            echo docker run --privileged --rm tonistiigi/binfmt --install arm64,arm
             docker context create buildcontext
             docker buildx create buildcontext --use
 
@@ -26,12 +24,12 @@ commands:
           command: |
             [ -z "$DOCKER_LOGIN" ] && exit 0
             [ -z "$DOCKER_PASSWORD" ] && exit 0
-            docker login --username=$DOCKER_LOGIN --password=$DOCKER_PASSWORD
+            echo "$DOCKER_PASSWORD" | docker login --username=$DOCKER_LOGIN --password-stdin
 
 jobs:
 
   build-multiarch-container:
-    resource_class: large
+    resource_class: medium
     docker:
       - image: cimg/base:stable
         auth:
@@ -41,14 +39,12 @@ jobs:
       DOCKER_TAG: "stlouisn/ubuntu"
       BUILD_PLATFORMS: "linux/arm64"
       #BUILD_PLATFORMS: "linux/arm64,linux/arm"
-      #BUILD_PLATFORMS: "linux/amd64,linux/arm64,linux/arm"
     steps:
       - checkout
       - setup_remote_docker:
           version: 20.10.11
-          docker_layer_caching: true
       - install-docker-buildx
-      - configure-docker-hub
+      #- configure-docker-hub
       - run:
           name: Build and push container
           no_output_timeout: 2h

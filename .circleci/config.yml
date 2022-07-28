@@ -9,6 +9,7 @@ jobs:
           username: $DOCKER_LOGIN
           password: $DOCKER_PASSWORD
     environment:
+      BUILD_DATE: "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
       BUILD_PLATFORMS: "linux/arm64,linux/arm/v7"
       C_MAINTAINER: "stlouisn"
       C_NAME: "ubuntu"

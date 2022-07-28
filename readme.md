@@ -13,7 +13,7 @@
 [license_logo]: https://img.shields.io/github/license/tianon/docker-brew-ubuntu-core
 [license_url]: https://github.com/tianon/docker-brew-ubuntu-core/blob/master/LICENSE
 
-[issues_logo]: https://img.shields.io/badge/-issues-no.svg?colorA=a7a7a7&colorB=e01563&logo=github&logoWidth=16
+[issues_logo]: https://img.shields.io/badge/-issues-no.svg?colorA=a7a7a7&colorB=e01563&logo=github&logoWidth=18
 [issues_url]: https://github.com/stlouisn/ubuntu_docker/issues
 
 ## Ubuntu Docker

@@ -24,17 +24,14 @@ jobs:
           name: Configure Docker Labels
           command: |
             export BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            export OS_CODENAME="$(curl -fsSL https://raw.githubusercontent.com/tianon/docker-brew-ubuntu-core/master/latest)"
-            export OS_VERSION="$(curl -fsSL --retry 5 --retry-delay 2 http://releases.ubuntu.com/${OS_CODENAME}/ | grep title | awk -F ' ' {'print $2'})"
-            export C_VERSION="${OS_VERSION}"
-            echo Build Labels
-            echo   build date     = $BUILD_DATE
-            echo   build platform = $BUILD_PLATFORM
+            bash .scripts/get_version.sh
             echo
-            echo Container Labels
-            echo   maintainer = $C_MAINTAINER
-            echo   image_name = $C_NAME:$C_TAG
-            echo   version    = $C_VERSION
+            echo Labels
+            echo ------------------------------------
+            echo build_date = $BUILD_DATE
+            echo maintainer = $C_MAINTAINER
+            echo image_name = $C_NAME:$C_TAG
+            echo image_version = $C_VERSION
       - run:
           name: Configure Docker Buildx
           command: |

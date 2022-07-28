@@ -3,16 +3,18 @@ version: 2.1
 jobs:
   build-multiarch-container:
     resource_class: small
-    docker:
-      - image: cimg/base:stable
-        auth:
-          username: stlouisn
-          password: $DOCKER_PASSWORD
     environment:
-      BUILD_PLATFORMS: "linux/arm64,linux/arm/v7"
+      C_DESCRIPTION: "ubuntu base image"
       C_MAINTAINER: "stlouisn"
       C_NAME: "ubuntu"
       C_TAG: "latest"
+      C_URL: "https://www.ubuntu.com/"
+      BUILD_PLATFORMS: "linux/arm64,linux/arm/v7"
+    docker:
+      - image: cimg/base:stable
+        auth:
+          username: $C_MAINTAINER
+          password: $DOCKER_PASSWORD
     steps:
       - checkout
       # - setup_remote_docker:
@@ -20,9 +22,8 @@ jobs:
       - run:
           name: Configure Docker labels
           command: |
-            # export BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            # export C_VERSION="$(bash .circleci/get_version.sh)"
-            bash .circleci/set_labels.sh
+            bash .circleci/get_version.sh
+            bash .circleci/docker_labels.sh
       # - run:
       #     name: Configure Docker Buildx
       #     command: |

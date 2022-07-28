@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-for FILE in $(find rootfs/. -name '*.sh'; do
+for FILE in $(find rootfs/. -name '*.sh'); do
     echo $FILE
     chmod +x $FILE
 done

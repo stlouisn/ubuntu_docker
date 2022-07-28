@@ -10,12 +10,9 @@ jobs:
           password: $DOCKER_PASSWORD
     environment:
       BUILD_PLATFORMS: "linux/arm64,linux/arm/v7"
-      C_DESCRIPTION: "ubuntu base image"
       C_MAINTAINER: "stlouisn"
       C_NAME: "ubuntu"
       C_TAG: "latest"
-      C_URL: "https://www.ubuntu.com/"
-      SCHEMA_VERSION: "1.0"
     steps:
       - checkout
       # - setup_remote_docker:
@@ -23,15 +20,9 @@ jobs:
       - run:
           name: Configure Docker labels
           command: |
-            export BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            export C_VERSION="$(bash .circleci/get_version.sh)"
-            echo Labels
-            echo ------------------------------------
-            echo build_date = $BUILD_DATE
-            echo maintainer = $C_MAINTAINER
-            echo image_name = $C_NAME:$C_TAG
-            echo description = $C_DESCRIPTION
-            echo image_version = $C_VERSION
+            # export BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            # export C_VERSION="$(bash .circleci/get_version.sh)"
+            bash .circleci/set_labels.sh
       # - run:
       #     name: Configure Docker Buildx
       #     command: |

@@ -13,7 +13,7 @@
 [license_logo]: https://img.shields.io/github/license/tianon/docker-brew-ubuntu-core
 [license_url]: https://github.com/tianon/docker-brew-ubuntu-core/blob/master/LICENSE
 
-## Ubuntu Docker
+### Ubuntu Docker
 
 [![Build Status][circleci_logo]][circleci_url]
 [![Docker Version][docker_version_logo]][docker_version_url]

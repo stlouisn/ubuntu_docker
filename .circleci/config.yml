@@ -59,6 +59,16 @@ jobs:
             docker buildx inspect --bootstrap
             echo
             docker buildx build --tag $C_MAINTAINER/$C_NAME:$C_TAG --platform $BUILD_PLATFORMS --progress plain --push .
+      - run:
+          name: Trigger docker
+          command: |
+            curl -v -X POST https://circleci.com/api/v1/project/stlouisn/openvpn_docker/tree/main?circle-token=$CIRCLE_TOKEN
+            #curl -v -X POST https://circleci.com/api/v1/project/stlouisn/transmission_docker/tree/main?circle-token=$CIRCLE_TOKEN
+            #curl -v -X POST https://circleci.com/api/v1/project/stlouisn/prowlarr_docker/tree/main?circle-token=$CIRCLE_TOKEN
+            #curl -v -X POST https://circleci.com/api/v1/project/stlouisn/flaresolverr_docker/tree/main?circle-token=$CIRCLE_TOKEN
+            curl -v -X POST https://circleci.com/api/v1/project/stlouisn/radarr_docker/tree/main?circle-token=$CIRCLE_TOKEN
+            #curl -v -X POST https://circleci.com/api/v1/project/stlouisn/sonarr_docker/tree/main?circle-token=$CIRCLE_TOKEN
+            #curl -v -X POST https://circleci.com/api/v1/project/stlouisn/lidarr_docker/tree/main?circle-token=$CIRCLE_TOKEN
 
 workflows:
   version: 2

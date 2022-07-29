@@ -60,8 +60,13 @@ jobs:
       #       echo
       #       docker buildx build --tag $C_MAINTAINER/$C_NAME:$C_TAG --platform $BUILD_PLATFORMS --progress plain --push .
       - run:
-          name: Trigger docker
-          command: curl -v --request POST -url https://circleci.com/api/v2/project/gh/stlouisn/openvpn_docker/pipeline --header "Circle-Token: $CIRCLE_API_KEY" --header "content-type: application/json" --data '{"branch":"main","parameters":{"image-name":"'$DOCKER_LOGIN"/"$CIRCLE_PROJECT_REPONAME":"0.1.<< pipeline.number >>'"}}'
+          name: Trigger
+          command: |
+            curl -v --request POST \
+              --url https://circleci.com/api/v2/project/gh/stlouisn/openvpn_docker/pipeline \
+              --header "Circle-Token: $CIRCLECI_API_KEY" \
+              --header "content-type: application/json" \
+              --data '{"branch":"main","parameters":{"image-name":"'$DOCKER_LOGIN"/"$CIRCLE_PROJECT_REPONAME":"0.1.<< pipeline.number >>'"}}'
           #curl -v -X POST https://circleci.com/api/v1/project/stlouisn/transmission_docker/tree/main?circle-token=$CIRCLE_TOKEN
           #curl -v -X POST https://circleci.com/api/v1/project/stlouisn/prowlarr_docker/tree/main?circle-token=$CIRCLE_TOKEN
           #curl -v -X POST https://circleci.com/api/v1/project/stlouisn/flaresolverr_docker/tree/main?circle-token=$CIRCLE_TOKEN

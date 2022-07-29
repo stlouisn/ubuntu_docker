@@ -28,7 +28,8 @@ Ubuntu Docker is a minimal base image that is configured for use within Docker c
 - Mechanism for easily running processes as non-root.
 
 ```docker
-docker pull stlouisn/ubuntu:latest /bin/bash -l
+docker pull stlouisn/ubuntu:latest
+docker run -it --rm stlouisn/ubuntu:latest /bin/bash -l
 ```
 
 #### Links

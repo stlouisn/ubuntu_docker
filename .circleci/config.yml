@@ -26,7 +26,7 @@ jobs:
             export C_VERSION="$(bash scripts/get_version.sh)"
       - run:
           name: Test Env
-          command: env
+          command: env | sort
       - run:
           name: Label dockerfile
           command: bash scripts/set_labels.sh

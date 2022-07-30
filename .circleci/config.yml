@@ -9,19 +9,18 @@ jobs:
           username: stlouisn
           password: $DOCKER_PASSWORD
     steps:
-      - checkout
+      - checkout:
+          name: Checkout code
       - setup_remote_docker:
           name: Setup remote Docker Engine
           version: 20.10.11
       - run:
-          name: Set Env
-          #command: echo 'export C_MAINTAINER="stlouisn"' >> $BASH_ENV
+          name: Setup environment variables
           command: |
             cat environment >> $BASH_ENV
-            export C_VERSION="$(bash scripts/get_version.sh)"
-      - run:
-          name: Test Env
-          command: env | sort
+            bash scripts/get_version.sh
+            env | grep BUILD_ | sort
+            env | grep C_ | sort
       - run:
           name: Label dockerfile
           command: bash scripts/set_labels.sh

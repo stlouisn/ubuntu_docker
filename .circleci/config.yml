@@ -12,17 +12,17 @@ jobs:
       - checkout:
           name: Checkout code
       - setup_remote_docker:
-          name: Setup remote Docker Engine
+          name: Spin up remote Docker Engine
           version: 20.10.11
       - run:
-          name: Setup environment variables
+          name: Setting environment variables
           command: |
             cat environment >> $BASH_ENV
             bash scripts/get_version.sh
-            env | grep BUILD_ | sort
-            env | grep C_ | sort
+            env | grep 'BUILD_' | sort
+            env | grep 'C_' | sort
       - run:
-          name: Label dockerfile
+          name: Labelling dockerfile
           command: bash scripts/set_labels.sh
       - run:
           name: Preparing dockerfile

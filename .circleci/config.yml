@@ -5,6 +5,7 @@ jobs:
     resource_class: small
     environment:
       C_DESCRIPTION: "ubuntu base image"   # <-- variable
+      #C_MAINTAINER: "stlouisn"              # <-- variable
       C_NAME: "ubuntu"                     # <-- variable
       C_TAG: "latest"                      # <-- variable
       BUILD_PLATFORMS: "linux/arm64,linux/arm/v7"
@@ -15,8 +16,17 @@ jobs:
           password: $DOCKER_PASSWORD
     steps:
       - checkout
-      - setup_remote_docker #:
-          #version: 20.10.11
+      - setup_remote_docker:
+          version: 20.10.11
+      - run:
+          name: Set Env
+          #command: cat .env >> $BASH_ENV
+          command: echo 'export C_MAINTAINER="stlouisn"' >> $BASH_ENV
+      - run:
+          name: Test Env
+          command: |
+            env
+            echo test=$C_MAINTAINER
       - run:
           name: Label dockerfile
           command: |

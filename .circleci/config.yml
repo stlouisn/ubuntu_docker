@@ -5,9 +5,9 @@ jobs:
     resource_class: small
     docker:
       - image: cimg/base:stable
-        auth:
-          username: stlouisn
-          password: $DOCKER_PASSWORD
+          auth:
+            username: stlouisn
+            password: $DOCKER_PASSWORD
     steps:
       - checkout:
           name: Checkout code

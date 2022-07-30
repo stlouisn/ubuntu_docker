@@ -3,18 +3,10 @@
 set -euo pipefail
 
 # Build variables
-BUILD_DATE="$(date -u +%Y-%m-%d\ %H:%M:%SZ)"
+# BUILD_DATE="$(date -u +%Y-%m-%d\ %H:%M:%SZ)"
 
 # Schema version
 SCHEMA_VERSION="1.0"
-
-# Output labels to console
-echo build_date = $BUILD_DATE
-echo maintainer = $C_MAINTAINER
-echo image_name = $C_NAME:$C_TAG
-echo description = $C_DESCRIPTION
-echo version = $C_VERSION
-echo
 
 # Append labels to dockerfile
 cat <<- EOF >> dockerfile

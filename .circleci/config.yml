@@ -20,8 +20,8 @@ jobs:
             cat environment >> $BASH_ENV
             bash scripts/get_version.sh
             source $BASH_ENV
-            env | grep 'BUILD_' | sort
-            env | grep 'C_' | sort
+            env | grep 'BUILD\_' | sort
+            env | grep 'C\_' | sort
       - run:
           name: Labelling dockerfile
           command: bash scripts/set_labels.sh

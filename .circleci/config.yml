@@ -19,7 +19,7 @@ jobs:
           command: |
             cat environment >> $BASH_ENV
             bash scripts/get_version.sh
-            env | sort
+            source $BASH_ENV
             env | grep 'BUILD_' | sort
             env | grep 'C_' | sort
       - run:

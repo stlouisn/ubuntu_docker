@@ -22,7 +22,6 @@ jobs:
             bash scripts/get_version.sh
             source $BASH_ENV
             env | grep '^BUILD_' | sort
-            echo
             env | grep '^C_' | sort
             echo
       - run:
@@ -37,27 +36,29 @@ jobs:
           command: |
             [ -z "$DOCKER_PASSWORD" ] && exit 1
             echo "$DOCKER_PASSWORD" | docker login --username=stlouisn --password-stdin
-      # - run:
-      #     name: Configure Docker Buildx
-      #     command: |
-      #       docker buildx version
-      #       echo
-      #       sudo apt-get update -qq && sudo apt-get install -y binfmt-support qemu-user-static
-      #       echo
-      #       docker pull multiarch/qemu-user-static
-      #       echo
-      #       docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-      #       echo
-      #       docker context create buildcontext
-      #       echo
-      #       docker buildx create buildcontext --use --platform $BUILD_PLATFORMS
-      # - run:
-      #     name: Build and push container
-      #     no_output_timeout: 20m
-      #     command: |
-      #       docker buildx inspect --bootstrap
-      #       echo
-      #       docker buildx build --tag stlouisn/$C_NAME:$C_TAG --platform $BUILD_PLATFORMS --progress plain --push .
+            echo
+      - run:
+          name: Configure Docker Buildx
+          command: |
+            docker buildx version
+            echo
+            sudo apt-get update -qq && sudo apt-get install -y binfmt-support qemu-user-static
+            echo
+            docker pull multiarch/qemu-user-static
+            echo
+            docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+            echo
+            docker context create buildcontext
+            echo
+            docker buildx create buildcontext --use --platform $BUILD_PLATFORMS > /dev/null
+      - run:
+          name: Build and push container
+          no_output_timeout: 20m
+          command: |
+            docker buildx inspect --bootstrap
+            echo
+            docker buildx build --tag stlouisn/$C_NAME:$C_TAG --platform $BUILD_PLATFORMS --progress plain --push .
+            echo
 
 workflows:
   version: 2

@@ -10,8 +10,8 @@ RUN \
     # Update apt-cache
     apt-get update && \
 
-    # # Upgrade all packages
-    # apt-get upgrade -y && \
+    # Upgrade all packages
+    apt-get upgrade -y && \
 
     # Install apt-utils
     apt-get install -y --no-install-recommends \
@@ -35,7 +35,7 @@ RUN \
         gosu && \
 
     # Install shell tools
-    apt install -y --no-install-recommends \
+    apt-get install -y --no-install-recommends \
         bash-completion \
         nano \
         tree && \
@@ -44,15 +44,6 @@ RUN \
     sed -i "s@alias ll='ls@#alias ll='ls@" /root/.bashrc && \
     sed -i "s@alias la='ls@#alias la='ls@" /root/.bashrc && \
     sed -i "s@alias l='ls@#alias l='ls@" /root/.bashrc && \
-
-    # # Remove unnecessary directories
-    # rm -rf \
-    #     /opt \
-    #     /usr/games \
-    #     /usr/local/games \
-    #     /srv \
-    #     /var/log/* \
-    #     /var/opt && \
 
     # Clean apt-cache
     apt-get autoremove -y --purge && \

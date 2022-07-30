@@ -8,4 +8,5 @@ OS_VERSION="$(curl -fsSL --retry 5 --retry-delay 2 http://releases.ubuntu.com/$O
 
 # Application version
 APP_VERSION="$OS_VERSION"
+echo 'export C_VERSION="$APP_VERSION"' >> $BASH_ENV
 echo "$APP_VERSION"

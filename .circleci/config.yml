@@ -17,8 +17,8 @@ jobs:
       - run:
           name: Setting environment variables
           command: |
-            echo "export BUILD_DATE=\""$(date -u +%Y-%m-%d\ %H:%M:%SZ)"\"" >> $BASH_ENV
             cat environment >> $BASH_ENV
+            bash scripts/get_date.sh
             bash scripts/get_version.sh
             source $BASH_ENV
             env | grep '^BUILD_' | sort

@@ -11,6 +11,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
+          name: Setup remote Docker Engine
           version: 20.10.11
       - run:
           name: Set Env

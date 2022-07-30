@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  build-multiarch-container:
+  build-container:
     resource_class: small
     environment:
       C_DESCRIPTION: "ubuntu base image"   # <-- variable
@@ -58,5 +58,4 @@ workflows:
   version: 2
   build-container:
     jobs:
-      - build-multiarch-container:
-          name: build_$CIRCLE_PROJECT_REPONAME
+      - build-container

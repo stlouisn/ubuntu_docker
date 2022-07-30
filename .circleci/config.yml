@@ -22,7 +22,7 @@ jobs:
           name: Set Env
           #command: echo 'export C_MAINTAINER="stlouisn"' >> $BASH_ENV
           command: |
-            cat .env >> $BASH_ENV
+            cat environment >> $BASH_ENV
             export C_VERSION="$(bash scripts/get_version.sh)"
       - run:
           name: Test Env

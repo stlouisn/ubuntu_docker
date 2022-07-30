@@ -17,17 +17,16 @@ jobs:
       - run:
           name: Setting environment variables
           command: |
+            echo "export BUILD_DATE=\""$(date -u +%Y-%m-%d\ %H:%M:%SZ)"\"" >> $BASH_ENV
             cat environment >> $BASH_ENV
             bash scripts/get_version.sh
             source $BASH_ENV
             env | grep '^BUILD_' | sort
             env | grep '^C_' | sort
       - run:
-          name: Labelling dockerfile
-          command: bash scripts/set_labels.sh
-      - run:
           name: Preparing dockerfile
           command: |
+            bash scripts/set_labels.sh
             sed -i -e '/^$/d' -e 's/^[ \t]*//' -e '/^#/d' dockerfile
             cat dockerfile
       - run:

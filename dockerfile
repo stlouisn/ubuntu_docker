@@ -1,11 +1,7 @@
-# FROM ubuntu:latest AS base-image
+FROM ubuntu:latest AS ubuntu-base
 
-# ARG APP_VERSION
-# ARG TARGETARCH
-
-FROM ubuntu:latest
-
-COPY rootfs /
+ARG TARGETARCH
+ARG APP_VERSION
 
 RUN \
 
@@ -51,10 +47,6 @@ RUN \
     apt-get install -y --no-install-recommends \
         tree && \
 
-    # Install bash-completion [ 1499 kb ]
-    # apt-get install -y --no-install-recommends \
-        # bash-completion && \
-
     # Customize root profile
     sed -i "s@alias ll='ls@#alias ll='ls@" /root/.bashrc && \
     sed -i "s@alias la='ls@#alias la='ls@" /root/.bashrc && \
@@ -64,13 +56,16 @@ RUN \
     apt-get autoremove -y --purge && \
     apt-get autoclean -y && \
 
-    # Remove unnecessary directories
+    # Remove unnecessary and temporary directories
     rm -rf \
         /etc/cron.d \
         /etc/cron.daily \
-        /etc/cron.daily \
         /opt \
+        /root/.bash_history \
+        /root/.cache \
+        /root/.wget-hsts \
         /srv \
+        /tmp/* \
         /usr/games \
         /usr/local/games \
         /usr/local/man \
@@ -79,16 +74,15 @@ RUN \
         /usr/share/doc-base \
         /usr/share/info \
         /usr/share/man \
+        /var/cache/* \
+        /var/lib/apt \
         /var/log/* \
         /var/opt && \
 
-    # Cleanup temporary folders
-    rm -rf \
-        /root/.bash_history \
-        /root/.cache \
-        /root/.wget-hsts \
-        /tmp/* \
-        /var/cache/* \
-        /var/lib/apt
+COPY rootfs /
+
+FROM scratch
+
+COPY --from=ubuntu-base / /
 
 CMD ["/bin/bash", "-l"]

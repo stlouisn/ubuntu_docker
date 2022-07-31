@@ -8,34 +8,34 @@ RUN \
     export DEBIAN_FRONTEND=noninteractive && \
 
     # Update apt-cache
-    apt-get update && \
+    apt-get update -qq && \
 
     # Upgrade all packages
-    apt-get upgrade -y && \
+    apt-get upgrade -yqq && \
 
     # Install apt-utils
-    apt-get install -y --no-install-recommends \
+    apt-get install -yqq --no-install-recommends \
         apt-utils && \
 
     # Install tzdata
-    apt-get install -y --no-install-recommends \
+    apt-get install -yqq --no-install-recommends \
         tzdata && \
 
     # Install SSL
-    apt-get install -y --no-install-recommends \
+    apt-get install -yqq --no-install-recommends \
         ca-certificates \
         openssl && \
 
     # Install curl
-    apt-get install -y --no-install-recommends \
+    apt-get install -yqq --no-install-recommends \
         curl && \
 
     # Install gosu
-    apt-get install -y --no-install-recommends \
+    apt-get install -yqq --no-install-recommends \
         gosu && \
 
     # Install shell tools
-    apt-get install -y --no-install-recommends \
+    apt-get install -yqq --no-install-recommends \
         bash-completion \
         nano \
         tree && \
@@ -46,8 +46,8 @@ RUN \
     sed -i "s@alias l='ls@#alias l='ls@" /root/.bashrc && \
 
     # Clean apt-cache
-    apt-get autoremove -y --purge && \
-    apt-get autoclean -y && \
+    apt-get autoremove -yqq --purge && \
+    apt-get autoclean -yqq && \
 
     # Cleanup temporary folders
     rm -rf \

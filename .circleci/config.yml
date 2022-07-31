@@ -2,7 +2,7 @@ version: 2.1
 
 jobs:
 
-  build-container:
+  build:
     resource_class: small
     docker:
       - image: cimg/base:stable
@@ -66,7 +66,7 @@ jobs:
               --push .
             echo
 
-  # test-container:
+  # test:
   #   resource_class: small
   #   docker:
   #     - image: cimg/base:stable

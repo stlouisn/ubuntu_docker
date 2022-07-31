@@ -77,12 +77,12 @@ RUN \
         /var/cache/* \
         /var/lib/apt \
         /var/log/* \
-        /var/opt && \
+        /var/opt
 
 COPY rootfs /
 
 FROM scratch
 
-COPY --from=ubuntu-base /* /*
+COPY --from=ubuntu-base / /
 
 CMD ["/bin/bash", "-l"]

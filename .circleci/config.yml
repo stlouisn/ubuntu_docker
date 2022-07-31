@@ -57,7 +57,12 @@ jobs:
           command: |
             docker buildx inspect --bootstrap
             echo
-            docker buildx build --squash --tag stlouisn/$C_NAME:$C_TAG --platform $BUILD_PLATFORMS --progress plain --push .
+            docker buildx build \
+              --tag stlouisn/$C_NAME:$C_TAG \
+              --platform $BUILD_PLATFORMS \
+              --build-arg APP_VERSION=$C_VERSION \
+              --progress plain \
+              --push .
             echo
 
 workflows:

@@ -1,6 +1,7 @@
 version: 2.1
 
 jobs:
+
   build-container:
     resource_class: small
     docker:
@@ -65,8 +66,25 @@ jobs:
               --push .
             echo
 
+  # test-container:
+  #   resource_class: small
+  #   docker:
+  #     - image: cimg/base:stable
+  #       auth:
+  #         username: stlouisn
+  #         password: $DOCKER_PASSWORD
+  #   steps:
+  #     - run:
+  #         name: Setting environment variables
+  #         command: docker run
+
 workflows:
   version: 2
   build-container:
     jobs:
-      - build-container
+      - build:
+          name: build-container
+      # - test:
+      #     name: test-container
+      #     requires:
+      #       - build

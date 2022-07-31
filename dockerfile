@@ -1,3 +1,8 @@
+# FROM ubuntu:latest AS base-image
+
+# ARG APP_VERSION
+# ARG TARGETARCH
+
 FROM ubuntu:latest
 
 COPY rootfs /
@@ -8,37 +13,47 @@ RUN \
     export DEBIAN_FRONTEND=noninteractive && \
 
     # Update apt-cache
-    apt-get update -qq && \
+    apt-get update && \
 
     # Upgrade all packages
-    apt-get upgrade -yqq && \
+    apt-get upgrade -y && \
 
-    # Install apt-utils
-    apt-get install -yqq --no-install-recommends \
+    # Install apt-utils [ 750 kb ]
+    apt-get install -y --no-install-recommends \
         apt-utils && \
 
-    # Install tzdata
-    apt-get install -yqq --no-install-recommends \
+    # Install tzdata [ 3925 kb ]
+    apt-get install -y --no-install-recommends \
         tzdata && \
 
-    # Install SSL
-    apt-get install -yqq --no-install-recommends \
+    # Install SSL [ 2413 kb ]
+    apt-get install -y --no-install-recommends \
         ca-certificates \
         openssl && \
 
-    # Install curl
-    apt-get install -yqq --no-install-recommends \
-        curl && \
+    # Install curl [ 3642 kb ]
+    # apt-get install -y --no-install-recommends \
+    #     curl && \
 
-    # Install gosu
-    apt-get install -yqq --no-install-recommends \
+    # Install wget [ 1072 kb ]
+    # apt-get install -y --no-install-recommends \
+    #     wget && \
+
+    # Install gosu [ 2212 kb ]
+    apt-get install -y --no-install-recommends \
         gosu && \
 
-    # Install shell tools
-    apt-get install -yqq --no-install-recommends \
-        bash-completion \
-        nano \
+    # Install nano [ 277 kb ]
+    apt-get install -y --no-install-recommends \
+        nano && \
+
+    # Install tree [ 108 kb ]
+    apt-get install -y --no-install-recommends \
         tree && \
+
+    # Install bash-completion [ 1499 kb ]
+    # apt-get install -y --no-install-recommends \
+        # bash-completion && \
 
     # Customize root profile
     sed -i "s@alias ll='ls@#alias ll='ls@" /root/.bashrc && \
@@ -46,14 +61,35 @@ RUN \
     sed -i "s@alias l='ls@#alias l='ls@" /root/.bashrc && \
 
     # Clean apt-cache
-    apt-get autoremove -yqq --purge && \
-    apt-get autoclean -yqq && \
+    apt-get autoremove -y --purge && \
+    apt-get autoclean -y && \
+
+    # # Remove unnecessary directories
+    # rm -rf \
+    #     /opt \
+    #     /usr/games \
+    #     /usr/local/games \
+    # # /usr/share/man \ # safe to remove?
+    # # /usr/share/doc \ # safe to remove?
+    # # /usr/share/doc-base \ # safe to remove?
+    # # /usr/share/info \ # safe to remove?
+    # # /usr/local/man \ # safe to remove?
+    # # /usr/local/share/man \ # safe to remove?
+    # # /etc/cron.d \ # safe to remove?
+    # # /etc/cron.daily \ # safe to remove?
+    # # /etc/cron.daily \ # safe to remove?
+    # # /var/log/* \ # safe to remove?    
+    #     /srv \
+    #     /var/log/* \
+    #     /var/opt && \
 
     # Cleanup temporary folders
     rm -rf \
+        /root/.bash_history \
         /root/.cache \
         /root/.wget-hsts \
         /tmp/* \
-        /var/lib/apt/lists/*
+        /var/cache/* \
+        /var/lib/apt
 
 CMD ["/bin/bash", "-l"]

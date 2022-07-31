@@ -5,56 +5,56 @@ ARG APP_VERSION
 
 RUN \
 
-    # Non-interactive frontend
-    export DEBIAN_FRONTEND=noninteractive && \
+    # # Non-interactive frontend
+    # export DEBIAN_FRONTEND=noninteractive && \
 
-    # Update apt-cache
-    apt-get update && \
+    # # Update apt-cache
+    # apt-get update && \
 
-    # Upgrade all packages
-    apt-get upgrade -y && \
+    # # Upgrade all packages
+    # apt-get upgrade -y && \
 
-    # Install apt-utils [ 750 kb ]
-    apt-get install -y --no-install-recommends \
-        apt-utils && \
-
-    # Install tzdata [ 3925 kb ]
-    apt-get install -y --no-install-recommends \
-        tzdata && \
-
-    # Install SSL [ 2413 kb ]
-    apt-get install -y --no-install-recommends \
-        ca-certificates \
-        openssl && \
-
-    # Install curl [ 3642 kb ]
+    # # Install apt-utils [ 750 kb ]
     # apt-get install -y --no-install-recommends \
-    #     curl && \
+    #     apt-utils && \
 
-    # Install wget [ 1072 kb ]
+    # # Install tzdata [ 3925 kb ]
     # apt-get install -y --no-install-recommends \
-    #     wget && \
+    #     tzdata && \
 
-    # Install gosu [ 2212 kb ]
-    apt-get install -y --no-install-recommends \
-        gosu && \
+    # # Install SSL [ 2413 kb ]
+    # apt-get install -y --no-install-recommends \
+    #     ca-certificates \
+    #     openssl && \
 
-    # Install nano [ 277 kb ]
-    apt-get install -y --no-install-recommends \
-        nano && \
+    # # Install curl [ 3642 kb ]
+    # # apt-get install -y --no-install-recommends \
+    # #     curl && \
 
-    # Install tree [ 108 kb ]
-    apt-get install -y --no-install-recommends \
-        tree && \
+    # # Install wget [ 1072 kb ]
+    # # apt-get install -y --no-install-recommends \
+    # #     wget && \
 
-    # Customize root profile
-    sed -i "s@alias ll='ls@#alias ll='ls@" /root/.bashrc && \
-    sed -i "s@alias la='ls@#alias la='ls@" /root/.bashrc && \
-    sed -i "s@alias l='ls@#alias l='ls@" /root/.bashrc && \
+    # # Install gosu [ 2212 kb ]
+    # apt-get install -y --no-install-recommends \
+    #     gosu && \
 
-    # Clean apt-cache
-    apt-get autoremove -y --purge && \
-    apt-get autoclean -y && \
+    # # Install nano [ 277 kb ]
+    # apt-get install -y --no-install-recommends \
+    #     nano && \
+
+    # # Install tree [ 108 kb ]
+    # apt-get install -y --no-install-recommends \
+    #     tree && \
+
+    # # Customize root profile
+    # sed -i "s@alias ll='ls@#alias ll='ls@" /root/.bashrc && \
+    # sed -i "s@alias la='ls@#alias la='ls@" /root/.bashrc && \
+    # sed -i "s@alias l='ls@#alias l='ls@" /root/.bashrc && \
+
+    # # Clean apt-cache
+    # apt-get autoremove -y --purge && \
+    # apt-get autoclean -y && \
 
     # Remove unnecessary and temporary directories
     rm -rf \
@@ -83,6 +83,6 @@ COPY rootfs /
 
 FROM scratch
 
-COPY --from=ubuntu-base / /
+COPY --from=ubuntu-base /* /*
 
 CMD ["/bin/bash", "-l"]

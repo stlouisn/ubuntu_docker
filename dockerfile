@@ -64,24 +64,23 @@ RUN \
     apt-get autoremove -y --purge && \
     apt-get autoclean -y && \
 
-    # # Remove unnecessary directories
-    # rm -rf \
-    #     /opt \
-    #     /usr/games \
-    #     /usr/local/games \
-    # # /usr/share/man \ # safe to remove?
-    # # /usr/share/doc \ # safe to remove?
-    # # /usr/share/doc-base \ # safe to remove?
-    # # /usr/share/info \ # safe to remove?
-    # # /usr/local/man \ # safe to remove?
-    # # /usr/local/share/man \ # safe to remove?
-    # # /etc/cron.d \ # safe to remove?
-    # # /etc/cron.daily \ # safe to remove?
-    # # /etc/cron.daily \ # safe to remove?
-    # # /var/log/* \ # safe to remove?    
-    #     /srv \
-    #     /var/log/* \
-    #     /var/opt && \
+    # Remove unnecessary directories
+    rm -rf \
+        /etc/cron.d \
+        /etc/cron.daily \
+        /etc/cron.daily \
+        /opt \
+        /srv \
+        /usr/games \
+        /usr/local/games \
+        /usr/local/man \
+        /usr/local/share/man \
+        /usr/share/doc \
+        /usr/share/doc-base \
+        /usr/share/info \
+        /usr/share/man \
+        /var/log/* \
+        /var/opt && \
 
     # Cleanup temporary folders
     rm -rf \

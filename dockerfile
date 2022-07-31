@@ -27,14 +27,6 @@ RUN \
         ca-certificates \
         openssl && \
 
-    # Install curl [ 3642 kb ]
-    # apt-get install -y --no-install-recommends \
-    #     curl && \
-
-    # Install wget [ 1072 kb ]
-    # apt-get install -y --no-install-recommends \
-    #     wget && \
-
     # Install gosu [ 2212 kb ]
     apt-get install -y --no-install-recommends \
         gosu && \

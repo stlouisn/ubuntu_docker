@@ -62,6 +62,6 @@ jobs:
 
 workflows:
   version: 2
-  ubuntu-docker:
+  build-container:
     jobs:
       - build-container

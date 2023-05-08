@@ -14,3 +14,6 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias tree='tree --dirsfirst -C'
+
+# Disable core dumps
+ulimit -S -c 0

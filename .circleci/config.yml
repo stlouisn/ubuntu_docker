@@ -12,6 +12,9 @@ jobs:
     steps:
       - checkout:
           name: Checkout code
+      - setup_remote_docker:
+          name: Spin up remote Docker Engine
+          version: default
       - run:
           name: Setting environment variables
           command: |

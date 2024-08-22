@@ -1,6 +1,6 @@
-#FROM ubuntu:latest AS ubuntu-base
+FROM ubuntu:latest AS ubuntu-base
 #latest "noble" image causing issues with install curl on arm versions
-FROM ubuntu:mantic AS ubuntu-base
+#FROM ubuntu:mantic AS ubuntu-base
 
 ARG TARGETARCH
 
